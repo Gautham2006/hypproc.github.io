@@ -1,0 +1,312 @@
+let model_scale = bodymovin.loadAnimation({
+    container: document.querySelector("#model-scale"),
+    renderer: "svg",
+    loop: false,
+    autoplay: false,
+    path: "/static/animations/home/model_scale/data.json"
+});
+
+// let burn = bodymovin.loadAnimation({
+//     container: document.querySelector("#burn"),
+//     renderer: "svg",
+//     loop: false,
+//     autoplay: true,
+//     path: "animations/burning_chip/data.json"
+// });
+
+// let model = $(".model-scale-media");
+// var over = false;
+
+// $(window).scroll(function(){
+    // var scrollPos = $(document).scrollTop();
+//     // console.log(scrollPos);
+//     if (scrollPos > 2400 && !over) {
+//         let x = -(scrollPos - 2400) + 'px';
+//         model.css({"transform": 'translateY(' + x + ')'});
+//     }
+
+//     if (scrollPos > 2600) {
+//         over = true;
+//         $("#model-scale").fadeOut(500, function() {
+//             model.css({"transform": 'translateY(0)'});
+//             $("#burn").css("animationPlayState", "running");
+//         });
+//     }
+// });
+
+
+let model = $(".model-media");
+
+function sequence_1(entries) {
+    entries.map((entry) => {
+        if (entry.isIntersecting) {
+            model_scale.play();
+        }
+    });
+}
+
+function sequence_2(entries) {
+    entries.map((entry) => {
+        if (entry.isIntersecting) {
+            var sequence_scrollPos = $(document).scrollTop();
+            // console.log(sequence_scrollPos);
+            $(window).scroll(function(){
+                var scrollPos = $(document).scrollTop();
+                let x = -Math.abs((scrollPos - sequence_scrollPos)/3) + 'px';
+                // console.log(x);
+                model.css({"transform": 'translateY(' + x + ')'});
+
+                if ((scrollPos > sequence_scrollPos + 400) || (scrollPos < sequence_scrollPos - 400)) {
+                    $("#model-scale").fadeOut(500, function() {
+                        model.css({"transform": 'translateY(0)'});
+                        $("#burn").css("animationPlayState", "running");
+                    });
+                }
+            });
+        } else {
+            $(window).unbind("scroll");
+            model.css({"transform": 'translateY(0)'});
+        }
+    });
+}
+
+function sequence_3(entries) {
+  entries.map((entry) => {
+    if (entry.isIntersecting) {
+      let scrollTop = $(document).scrollTop();
+
+      $(window).scroll(function() {
+        let textScroll = 200 - ($(document).scrollTop() - scrollTop)/3;
+        console.log(textScroll);
+
+        if (textScroll <= 200) {
+          textScroll += "px";
+          $(".text-block1").css({"transform" : "translateY(" + textScroll + ")"})
+        }
+        else {
+          $(".text-block1").css({"transform" : "translateY(200px)"})
+        }
+
+        if (textScroll < (0 + "px")) {
+          $(".text-block1").css("opacity", "0");
+          $("#tesla-drive").addClass("hidden");
+          $("#tesla-swipe").removeClass("hidden");
+
+          $("#tesla-swipe").on('ended',function(){
+            $("#tesla-swipe").addClass("hidden");
+            $("#tesla-zoom").removeClass("hidden");
+          });
+
+          $("#tesla-zoom").on('ended',function(){
+            $("#tesla-swipe").css("opacity", "0");
+            $("#tesla-desc").css("opacity", "1");
+            $("#tesla-zoom").css("opacity", "0.4");
+          });
+
+        }
+        
+      });
+
+    } 
+    else {
+      console.log("200");
+      $(".text-block1").css({"transform" : "translateY(200px)"})
+    }
+  });
+}
+
+let observer = new IntersectionObserver(sequence_1);
+observer.observe($(".sequence")[0]);
+
+observer = new IntersectionObserver(sequence_2, {threshold: 1});
+observer.observe($(".sequence")[0]);
+
+observer = new IntersectionObserver(sequence_3);
+observer.observe($(".text-block1")[0]);
+
+
+var tooltip = document.querySelectorAll('.coupontooltip');
+
+document.addEventListener('mousemove', fn, false);
+
+function fn(e) {
+    for (var i=tooltip.length; i--;) {
+        let container_fluid_wid = document.querySelector(".container-fluid").offsetWidth;
+        let wid = (screen.width - container_fluid_wid)/2;
+
+        tooltip[i].style.left = e.clientX - wid + 'px';
+        tooltip[i].style.top = 250+ 'px';
+    }
+}
+
+var tooltipSpan1 = document.querySelector('#tooltip1');
+var tooltipSpan2 = document.querySelector('#tooltip2');
+
+window.onmousemove = function (e) {
+    var x = e.clientX,
+        y = e.clientY;
+    tooltipSpan1.style.top = (y + 20) + 'px';
+    tooltipSpan1.style.left = (x + 20) + 'px';
+
+    tooltipSpan2.style.top = (y + 20) + 'px';
+    tooltipSpan2.style.left = (x + 20) + 'px';
+};
+
+let portal = document.querySelector("#portal");
+portal.addEventListener("ended", function () {
+    portal.currentTime = 2.15;
+    portal.play();
+}, false);
+
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('overlay')
+
+openModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal)
+  })
+})
+
+overlay.addEventListener('click', () => {
+  const modals = document.querySelectorAll('.modal.active')
+  modals.forEach(modal => {
+    closeModal(modal)
+  })
+})
+
+closeModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = button.closest('.modal')
+    closeModal(modal)
+  })
+})
+
+function openModal(modal) {
+  if (modal == null) return
+  modal.classList.add('active')
+  overlay.classList.add('active')
+}
+
+function closeModal(modal) {
+  if (modal == null) return
+  modal.classList.remove('active')
+  overlay.classList.remove('active')
+}
+
+let timer;
+
+document.addEventListener('input', e => {
+  const el = e.target;
+  
+  if( el.matches('[data-color]') ) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      document.documentElement.style.setProperty(`--color-${el.dataset.color}`, el.value);
+    }, 100)
+  }
+});
+
+// function sendEmail() {
+//   Email.send({
+//     Host : "mail.procyonphotonics.org",
+//     Username : "admin@procyonphotonics.org",
+//     Password : "Procyon123!",
+//     To : 'admin@procyonphotonics.org',
+//     From : document.querySelector(".email").value,
+//     Subject : "Waitlist",
+//     Body : "Name: " + document.querySelector(".name").value +
+//      "<br> Email: " + document.querySelector(".email").value +
+//      "<br> Company: " + document.querySelector(".company").value +
+//      "<br> Phone: " + document.querySelector(".phone").value +
+//      "<br> Additional Notes: " + document.querySelector(".notes").value
+//   }).then(
+//     message => alert("Your waitlist request is now pending approval, expect an email back from us to the email your provided soon.")
+//   );
+// }
+
+// const form = document.getElementById("form");
+// const result = document.getElementById("result");
+
+// form.addEventListener("submit", function (e) {
+//   const formData = new FormData(form);
+//   e.preventDefault();
+//   var object = {};
+//   formData.forEach((value, key) => {
+//     object[key] = value;
+//   });
+//   var json = JSON.stringify(object);
+//   result.innerHTML = "Please wait...";
+
+//   fetch("https://api.web3forms.com/submit", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Accept: "application/json"
+//     },
+//     body: json
+//   })
+//     .then(async (response) => {
+//       let json = await response.json();
+//       if (response.status == 200) {
+//         result.innerHTML = json.message;
+//         result.classList.remove("text-gray-500");
+//         result.classList.add("text-green-500");
+//       } else {
+//         console.log(response);
+//         result.innerHTML = json.message;
+//         result.classList.remove("text-gray-500");
+//         result.classList.add("text-red-500");
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       result.innerHTML = "Something went wrong!";
+//     })
+//     .then(function () {
+//       form.reset();
+//       setTimeout(() => {
+//         result.style.display = "none";
+//       }, 5000);
+//     });
+// });
+
+
+// function sendMail(name, email, subject, message) {
+//   const myHeaders = new Headers();
+//   myHeaders.append("Content-Type", "application/json");
+//   myHeaders.set('Authorization', 'Basic ' + btoa('99627bab5afe378f87afce6c150dc870'+":" +'7b5a7b4ed131aa40cda3c1d69ea451a5'));
+
+//   const data = JSON.stringify({
+//     "Messages": [{
+//       "From": {"Email": "admin@procyonphotonics.org", "Name": "Admin"},
+//       "To": [{"Email": email, "Name": name}],
+//       "Subject": subject,
+//       "TextPart": message
+//     }]
+//   });
+
+//   const fs = require('fs') 
+//   let write = name + ": " + email + ", " + message + " "
+    
+//   fs.writeFile('Output.txt', write, (err) => {
+//     if (err) throw err;
+//   })
+
+//   const requestOptions = {
+//     method: 'POST',
+//     headers: myHeaders,
+//     body: data,
+//   };
+
+//   fetch("https://api.mailjet.com/v3.1/send", requestOptions)
+//     .then(response => response.text())
+//     .then(result => console.log(result))
+//     .catch(error => console.log('error', error));
+// }
+
+// function send() {
+//   sendMail(document.querySelector(".name"), document.querySelector(".email"), 'Waitlist Request','We have successfully recieved your waitlist request, thank you for your interest in joining the Procyon waitlist! <br><br> Thank you, <br> The Procyon team')
+// }
+

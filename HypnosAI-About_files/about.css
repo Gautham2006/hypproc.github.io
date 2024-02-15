@@ -1,0 +1,333 @@
+.person {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    box-shadow: 0 0 20px #121212;
+}
+
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.hook-bottom {
+    width: 800px;
+}
+
+.people {
+    display: flex;
+    justify-content: center;
+}
+
+.people-boxes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 25px;
+    /* animation: fade-in 1s paused; */
+    border-bottom: 1px solid #121212;
+}
+
+.sub-team {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 25px;
+    text-align: center;
+}
+
+.sub-team-container {
+    display: flex;
+    justify-content: center;
+}
+
+.people-box {
+    margin: 0 0 40px 0;
+    width: 400px;
+}
+
+.people-card {
+    color: white;
+    backface-visibility: hidden;
+    width: 400px;
+    height: 400px;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    transition: all 0.5s;
+}
+
+.people-desc {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+    display: inline-block;
+}
+
+.collapsible {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+  }
+  
+  .collapsible:after {
+    content: '\002B';
+    font-size: 2em;
+    float: right;
+  }
+  
+  .active:after {
+    content: "\2212";
+  }
+  
+  .desc-text {
+    margin-top: 10px;
+    padding-top: 10px;
+    max-height: 0;
+    overflow: hidden;
+    font-size: 13px;
+    transition: max-height 0.2s ease-out;
+  }
+
+.people-heading {
+    font-size: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.people-role {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+  box-shadow: 0 0 7.5px #121212;
+  padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col .h4{
+	font-size: 20px;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	text-decoration: none;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	padding-left: 8px;
+}  
+.social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+    background-color: #121212;
+	margin:0 10px 0px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+
+.social-container {
+    /* margin-top: 10px; */
+    display: inline-block;
+}
+
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+@media (max-width: 1375px) {
+    .people-box {
+        width: 300px;
+    }
+    .person {
+        width: 300px;
+        height: 300px;
+    }
+    .people-card {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .people-boxes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 50px;
+        width: fit-content;
+    }
+
+    .sub-team {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 50px;
+        width: fit-content;
+    }
+}
+
+@media (max-width: 865px) {
+    .hook-bottom {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 700px) {
+    .people-boxes {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 50px;
+        width: fit-content;
+    }
+
+    .sub-team {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 50px;
+        width: fit-content;
+    }
+
+    .people-box {
+        width: 500px;
+    }
+    .person {
+        width: 500px;
+        height: 500px;
+    }
+    .people-card {
+        width: 500px;
+        height: 500px;
+    }
+
+}
+
+@media (max-width: 700px) {
+    .people-boxes {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 50px;
+        width: fit-content;
+    }
+
+    .sub-team {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 50px;
+        width: fit-content;
+    }
+
+    .people-box {
+        width: 500px;
+    }
+    .person {
+        width: 500px;
+        height: 500px;
+    }
+    .people-card {
+        width: 500px;
+        height: 500px;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .people-box {
+        width: 90vw;
+    }
+    .person {
+        width: 90vw;
+        height: 90vw;
+    }
+    .people-card {
+        width: 90vw;
+        height: 90vw;
+    }
+
+}
+
+
+.hero-cont {
+    position: relative;
+}
+
+.video-wrapper {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+}
+
+.hero-text {
+    max-width: 80ch;
+}
+
+@media screen and (max-width:500px) {
+    .hero-text {
+        width: fit-content;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+}

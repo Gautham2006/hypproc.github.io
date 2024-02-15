@@ -1,0 +1,246 @@
+:root {
+  --color-light: white;
+  --color-dark: black;
+  --color-signal: #fab700;
+  --color-background: var(--color-dark);
+  --size-bezel: .5rem;
+  --size-radius: 4px;
+  line-height: 1.4;
+  font-size: calc(0.6rem + 0.4vw);
+  color: var(--color-text);
+}
+@keyframes slide-up {
+  0% {
+    margin-top: 50%;
+  }
+  100% {
+    margin-top: 0%;
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes shrink {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+@keyframes slide-in {
+  0% {
+    top: -112px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+.hero-text {
+  width: 900px;
+}
+
+@media (max-width: 1024px) {
+  .hero-text {
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+}
+.hero-main {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-caption {
+  font-size: 4em;
+  text-align: center;
+  width: 50vw;
+}
+
+.tachyon-anim {
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  animation: fade-in 1s;
+}
+
+#burn {
+  width: 350px;
+  animation: fade 1s paused;
+}
+
+/* 
+.burn-container {
+  display: flex;
+  justify-content: center;
+} */
+/* #model-scale { 
+  animation: fade-out 1s paused;
+} */
+.section-2 {
+  height: 250vh;
+}
+
+/* .title-box {
+  margin-top: 15vh;
+} */
+.hero-cont {
+  position: relative;
+}
+
+.inference-title {
+  width: 400px;
+}
+
+@media screen and (max-width: 600px) {
+  .inference-title {
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+.tooltip {
+  text-decoration: none;
+  position: relative;
+}
+
+.tooltip span {
+  display: none;
+}
+
+.tooltip:hover span {
+  display: block;
+  position: fixed;
+  overflow: hidden;
+}
+
+.tooltip-box {
+  width: 300px;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px;
+  background-color: #121212;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  z-index: 1000;
+  background-color: black;
+  width: 500px;
+  max-width: 80%;
+  padding: 20px;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-body {
+  padding-bottom: 30px;
+}
+
+.modal-header {
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header .title {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.input {
+  position: relative;
+}
+.input__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * 0.5);
+  margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background: var(--color-background);
+  transition: transform 120ms ease-in;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.input__field {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 3px solid currentColor;
+  padding: calc(var(--size-bezel) * 1.5) var(--size-bezel);
+  color: currentColor;
+  background: transparent;
+}
+.input__field:not(:-moz-placeholder-shown) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.input__field:focus + .input__label, .input__field:not(:placeholder-shown) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+
+input:focus {
+  outline: none;
+}
+
+.wpforms-field-required {
+  background-color: black;
+  border: 1px solid #808080;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}/*# sourceMappingURL=home.css.map */

@@ -1,0 +1,40 @@
+$("header").addClass("transparent");
+$("header").css("border-bottom", "none");
+
+var above = false;
+
+$(window).scroll(function() {
+    if ($(window).scrollTop() > 0) {
+        $("header").removeClass("transparent");
+        $("header").addClass("black");
+        $("header").addClass("add-shadow");
+        $("header").removeClass("remove-shadow");
+
+        if (above == false) {
+            above = true;
+            document.querySelector("#logo").play();
+        }
+    }
+    else {
+        $("header").removeClass("black");
+        $("header").addClass("transparent");
+        $("header").addClass("remove-shadow");
+        $("header").removeClass("add-shadow");
+        above = false;
+    }
+});
+
+
+let navToggle = false;
+$(".navbar-toggle").click(function() {
+    console.log("hi");
+    if (!navToggle) {
+        $(".navbar-collapse").removeClass("hidden");
+        $(".navbar-collapse").addClass("flex");
+    }
+    else {
+        $(".navbar-collapse").removeClass("flex");
+        $(".navbar-collapse").addClass("hidden");
+    }
+    navToggle = !navToggle;
+});

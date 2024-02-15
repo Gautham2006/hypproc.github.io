@@ -1,0 +1,99 @@
+const OPENAI_API_KEY = "LFSclDSCA576lV6Uw6lFmTwZzJw3r4hOMQwB63x6K2c";
+const OPENAI_API_BASE = "https://chimeragpt.adventblocks.cc/api/v1";
+
+async function getResponse(message, messages) {
+    messages.push({
+        role: "user",
+        content: message,
+    });
+
+    const requestBody = {
+        model: "gpt-3.5-turbo-0301",
+        messages: messages,
+    };
+
+    try {
+        const response = await axios.post(OPENAI_API_BASE + "/chat/completions", requestBody, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${OPENAI_API_KEY}`,
+            },
+        });
+
+        const reply = response.data.choices[0].message.content;
+        messages.push({
+            role: "assistant",
+            content: reply,
+        });
+
+        return reply;
+    } catch (error) {
+        console.error("Error calling OpenAI API:", error.message);
+        return null;
+    }
+}
+
+function linkify(text) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<a class="chat-link" href="' + url + '">' + url + '</a>';
+    });
+}
+
+const chat = $("#chat");
+const messages = [
+    {
+        "role": "system",
+        "content": "At Procyon Photonics, they have a lineup of several products such as Tachyon, a deep learning hardware accelerator. As they grow, they will add some more products to our lineup such as devices that make integrating photonics to your lives as seamless as possible. They also created Apollo, a programming language designed for optical computing. Tachyon is their first deep learning hardware accelerator (computer chip), capable of both training and deploying the next generation of AI. Their integrated on-chip memory systems minimize opto-electric cross-talk, saving resources and allowing for easy scalability in data centers, research labs, and edge devices."
+    },
+    {
+        "role": "system",
+        "content": "Procyon Photonics is a cutting-edge AI hardware company, founded by Sathvik Redrouthu and Jagadeepram Maddipatla. We recently were funded by the 1517 fund, by Peter Thiel. Sathvik Redrouthu is currently a student at TJHSST, and is the Founder, CEO, and CTO at Procyon Photonics, and builds company culture, raises capital, and establishes company focus based on the market industries. He also leads hardware design and software development, does SoC design, photonics design, coding, and grant work. Sathvik’s interest in computers began when wanted to understand what happened under the hood when computer programs were run, down to the fundamental particles of reality. This launched him down an 8-year path of programming language theory (PLT), where he ended up building multiple compilers and virtual machines. He also designed multiple computers operating on different particles, ranging from electronics-based ones to ones running on water; using light was his next endeavor. The decision to go optical was a passing whim to see if a light-speed computer was possible, but Jagadeepram Maddipatla quickly understood the practical implications of an optical machine. The project evolved into an obsession and eventually a startup with a great team and functional prototypes."
+    },
+    {
+        "role": "system",
+        "content": "From now on, any question I ask has to be about the company Procyon Photonics and Procyon Photonics only. For example, if I ask how is light better than electricity, talk about how light is better for computing and the advantages it has over electricity in computing. Also please make your response as short as possible, like at most 3 sentences long. Here are some websites with resources about the company, Company Website: https://www.procyonphotonics.org/ Research Paper: https://arxiv.org/pdf/2208.06749.pdf Press Release: https://www.einnews.com/pr_news/615422387/optical-computer-chip-startup-procyon-launches-matrix-unit-boosting-computing-power-starting-a-new-era-for-mankind London Post article about Sathvik Redrouthu on Procyon Photonics hardware: https://londondailypost.com/the-next-alan-turing-changes-the-outlook-of-modern-computing/"
+    },
+];
+const oMessages = messages;
+
+$(document).ready(function() {
+    $('form').on('submit', function(event) { 
+        
+        event.preventDefault();
+        let prompt = $("#text").val();
+
+        if (prompt == "clear") {
+            chat.html("");
+            $("#text, textarea").val("");
+            messages = oMessages
+        }
+        else {
+
+            chat.append('<div>' + prompt + '</div>'); 
+            let newChat = $("<div><span class='blinking-cursor'>|</span></div>");
+            chat.append(newChat);
+            $("#text, textarea").val("");
+            $("#text").prop('readonly', true);
+            
+            getResponse(prompt, messages).then((reply) => {
+                console.log(reply);
+                let index = 0;
+                function type() {
+                    if (index < reply.length) {
+                        newChat.html(linkify(reply.slice(0, index)) + '<span class="blinking-cursor">|</span>');
+                        index++;
+                        setTimeout(type, Math.random());
+                    } else {
+                        newChat.html(linkify(reply.slice(0, index)));
+                    }
+                }
+                type();
+                $("#text").prop('readonly', false);
+
+            });
+
+        }
+
+    });     
+});
