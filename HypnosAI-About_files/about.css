@@ -110,7 +110,7 @@ body, html {
         justify-content: space-evenly; /* Adjusts spacing for smaller screens */
     }
 }
-
+ 
 @media (max-width: 480px) {
     .people-boxes {
         flex-direction: column; /* Stacks images vertically on very small screens */
