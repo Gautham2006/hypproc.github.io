@@ -425,3 +425,33 @@ footer {
         opacity: 1;
     }
 }
+
+/* Add this to your existing CSS */
+
+/* Tabbed Interface */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    background: rgba(0, 180, 219, 0.3);
+    color: #fff;
+    border: 1px solid #00B4DB;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tab-link:hover, .tab-link.active {
+    background: #00B4DB;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}

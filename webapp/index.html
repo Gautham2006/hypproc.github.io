@@ -39,8 +39,12 @@
     <!-- Dashboard Section -->
     <section class="dashboard" id="dashboard" style="display:none;">
         <div class="container">
-            <!-- Left Column: Call Logs -->
-            <div class="left-column">
+            <div class="tabs">
+                <button class="tab-link active" onclick="openTab(event, 'CallLogs')">Call Logs</button>
+                <button class="tab-link" onclick="openTab(event, 'Calendar')">Calendar</button>
+                <button class="tab-link" onclick="openTab(event, 'Analytics')">Analytics</button>
+            </div>
+            <div class="tab-content" id="CallLogs">
                 <h2>Recent Call Logs</h2>
                 <input type="text" class="search-bar" placeholder="Search logs...">
                 <div class="call-log-list">
@@ -65,11 +69,14 @@
                 </div>
             </div>
 
-            <!-- Right Column: Google Calendar -->
-            <div class="right-column">
+            <div class="tab-content" id="Calendar" style="display:none;">
                 <h2>Your Schedule</h2>
-                <button class="btn add-event">Add New Event</button>
                 <iframe id="calendar-iframe" src="" style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+            </div>
+
+            <div class="tab-content" id="Analytics" style="display:none;">
+                <h2>Analytics</h2>
+                <!-- Add your analytics content here -->
             </div>
         </div>
     </section>
