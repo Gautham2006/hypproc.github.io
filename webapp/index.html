@@ -22,8 +22,7 @@
             </ul>
         </nav>
         <div class="login-signup">
-            <button class="btn login">Login</button>
-            <button class="btn signup">Sign Up</button>
+            <button class="btn login" id="google-signin-btn">Login with Google</button>
         </div>
     </header>
 
@@ -35,45 +34,6 @@
             <button class="btn cta">Get Started Now</button>
         </div>
     </section>
-
-    <!-- Main Content Area -->
-    <main>
-        <div class="container">
-            <!-- Left Column: Call Logs -->
-            <div class="left-column">
-                <h2>Recent Call Logs</h2>
-                <input type="text" class="search-bar" placeholder="Search logs...">
-                <div class="call-log-list">
-                    <div class="call-log-entry">
-                        <div class="caller-name">John Doe</div>
-                        <div class="call-details">
-                            <span class="call-date">2024-07-24</span>
-                            <span class="call-time">10:30 AM</span>
-                            <span class="call-duration">5 mins</span>
-                            <span class="call-status completed">Completed</span>
-                        </div>
-                        <div class="actions">
-                            <button class="btn view">View Details</button>
-                            <button class="btn delete">Delete</button>
-                        </div>
-                    </div>
-                    <!-- Repeat similar blocks for other call logs -->
-                </div>
-                <div class="pagination">
-                    <button class="btn prev">Previous</button>
-                    <button class="btn next">Next</button>
-                </div>
-            </div>
-
-            <!-- Right Column: Google Calendar -->
-            <div class="right-column">
-                <h2>Your Schedule</h2>
-                <button class="btn add-event">Add New Event</button>
-                <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id&ctz=your_timezone"
-                    style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
-            </div>
-        </div>
-    </main>
 
     <!-- Features Section -->
     <section class="features">
@@ -137,6 +97,45 @@
             </div>
         </div>
     </footer>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard" id="dashboard" style="display:none;">
+        <div class="container">
+            <!-- Left Column: Call Logs -->
+            <div class="left-column">
+                <h2>Recent Call Logs</h2>
+                <input type="text" class="search-bar" placeholder="Search logs...">
+                <div class="call-log-list">
+                    <div class="call-log-entry">
+                        <div class="caller-name">John Doe</div>
+                        <div class="call-details">
+                            <span class="call-date">2024-07-24</span>
+                            <span class="call-time">10:30 AM</span>
+                            <span class="call-duration">5 mins</span>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn view">View Details</button>
+                            <button class="btn delete">Delete</button>
+                        </div>
+                    </div>
+                    <!-- Repeat similar blocks for other call logs -->
+                </div>
+                <div class="pagination">
+                    <button class="btn prev">Previous</button>
+                    <button class="btn next">Next</button>
+                </div>
+            </div>
+
+            <!-- Right Column: Google Calendar -->
+            <div class="right-column">
+                <h2>Your Schedule</h2>
+                <button class="btn add-event">Add New Event</button>
+                <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id&ctz=your_timezone"
+                    style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+    </section>
 
     <!-- JavaScript -->
     <script src="script.js"></script>

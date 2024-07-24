@@ -42,4 +42,16 @@ document.addEventListener("DOMContentLoaded", function() {
         const walk = (x - startX) * 3; //scroll-fast
         carousel.scrollLeft = scrollLeft - walk;
     });
+
+    // Google OAuth Sign-In
+    document.getElementById('google-signin-btn').addEventListener('click', () => {
+        // Redirect to Google OAuth page
+        // Replace with actual OAuth URL
+        window.location.href = 'https://accounts.google.com/o/oauth2/auth?client_id=164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com&redirect_uri=https://www.hypnos.site/webapp&response_type=token&scope=email profile';
+    });
+
+    // Simulate successful login for demo purposes
+    if (window.location.hash.includes('access_token')) {
+        document.getElementById('dashboard').style.display = 'block';
+    }
 });
