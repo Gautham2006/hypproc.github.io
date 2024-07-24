@@ -14,6 +14,7 @@
         <section>
             <h2>About This App</h2>
             <p>This is a sample web application integrated with Make.com scenarios.</p>
+            <div id="makeid"></div>
         </section>
         <section>
             <h2>Form Submission</h2>
@@ -41,6 +42,7 @@
             .then(response => response.json())
             .then(result => {
                 console.log('Success:', result);
+                document.getElementById('result').innerHTML = `<p>${result}</p>`;
             })
             .catch(error => {
                 console.error('Error:', error);
