@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
-    const redirectUri = 'https://hypnos.site/webapp'; // Replace with your main page URL
+    const redirectUri = 'https://www.hypnos.site/webapp'; // Replace with your main page URL
     const scope = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
     
     // Google OAuth Sign-In
