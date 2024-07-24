@@ -67,23 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     // Add this to your existing JavaScript
 
-    function openTab(event, tabName) {
-        // Get all elements with class="tab-content" and hide them
-        var tabContents = document.getElementsByClassName("tab-content");
-        for (var i = 0; i < tabContents.length; i++) {
-            tabContents[i].style.display = "none";
-        }
-
-        // Get all elements with class="tab-link" and remove the class "active"
-        var tabLinks = document.getElementsByClassName("tab-link");
-        for (var i = 0; i < tabLinks.length; i++) {
-            tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab and add an "active" class to the button that opened the tab
-        document.getElementById(tabName).style.display = "block";
-        event.currentTarget.className += " active";
-    }
+   
 
     // Set default tab to open
     document.addEventListener("DOMContentLoaded", function() {
@@ -91,3 +75,20 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+function openTab(event, tabName) {
+    // Get all elements with class="tab-content" and hide them
+    var tabContents = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
+
+    // Get all elements with class="tab-link" and remove the class "active"
+    var tabLinks = document.getElementsByClassName("tab-link");
+    for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    event.currentTarget.className += " active";
+}
