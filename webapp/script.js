@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const clientId = 'YOUR_CLIENT_ID'; // Replace with your actual client ID
+    const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
     const redirectUri = 'https://hypnos.site/webapp'; // Replace with your actual redirect URI
     const scope = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
 
