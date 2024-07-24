@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
     const redirectUri = 'https://www.hypnos.site/webapp'; // Replace with your actual redirect URI
-    const scope = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+    const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
 
     console.log('Page loaded');
 
@@ -38,20 +38,31 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('google-signin-btn').style.display = 'none';
         document.getElementById('google-signout-btn').style.display = 'block';
 
-        // Optional: Make authenticated requests to Google APIs using the access token
-        // Example: Fetch user profile
-        fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', {
+        // Fetch user's primary calendar ID and update the calendar iframe
+        const accessToken = localStorage.getItem('access_token');
+        fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList', {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                Authorization: `Bearer ${accessToken}`
             }
         })
         .then(response => response.json())
         .then(data => {
-            console.log('User profile data:', data);
+            console.log('Calendar List:', data);
+            const primaryCalendar = data.items.find(calendar => calendar.primary);
+            if (primaryCalendar) {
+                updateCalendarIframe(primaryCalendar.id);
+            } else {
+                console.error('Primary calendar not found.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching calendar list:', error);
         });
+    }
 
-        // Update the calendar iframe
-        const calendarIframe = document.getElementById('calendar-iframe');
-        calendarIframe.src = `https://calendar.google.com/calendar/embed?src=your_calendar_id&ctz=America/New_York`;
+    function updateCalendarIframe(calendarId) {
+        console.log('Updating calendar iframe with calendar ID:', calendarId);
+        const iframe = document.getElementById('calendar-iframe');
+        iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=America/New_York`;
     }
 });
