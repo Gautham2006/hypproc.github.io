@@ -2,52 +2,69 @@ document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
     const redirectUri = 'https://hypnos.site/webapp'; // Replace with your actual redirect URI
     const scope = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+    const discoveryDocs = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
     console.log('Page loaded');
+    console.log('Redirect URI:', redirectUri);
 
-    // Google OAuth Sign-In
-    document.getElementById('google-signin-btn').addEventListener('click', () => {
-        console.log('Sign in button clicked');
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${encodeURIComponent(scope)}`;
-        window.location.href = authUrl;
-    });
-
-    // Sign out functionality
-    document.getElementById('google-signout-btn').addEventListener('click', () => {
-        console.log('Sign out button clicked');
-        localStorage.removeItem('access_token');
-        window.location.href = 'https://hypnos.site/webapp'; // Redirect to the correct URI after logout
-    });
-
-    // Handle OAuth 2.0 response
-    if (window.location.hash.includes('access_token')) {
-        console.log('Access token found in URL');
-        const accessToken = window.location.hash.split('&')[0].split('=')[1];
-        localStorage.setItem('access_token', accessToken);
-        displayDashboard();
-    } else if (localStorage.getItem('access_token')) {
-        console.log('Access token found in localStorage');
-        displayDashboard();
-    } else {
-        console.log('No access token found');
+    function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
     }
 
-    function displayDashboard() {
-        console.log('Displaying dashboard');
-        document.getElementById('dashboard').style.display = 'block';
-        document.getElementById('google-signin-btn').style.display = 'none';
-        document.getElementById('google-signout-btn').style.display = 'block';
+    function initClient() {
+        gapi.client.init({
+            apiKey: apiKey,
+            clientId: clientId,
+            discoveryDocs: discoveryDocs,
+            scope: scope
+        }).then(function () {
+            // Listen for sign-in state changes.
+            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
-        // Optional: Make authenticated requests to Google APIs using the access token
-        // Example: Fetch user profile
-        fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('access_token')}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('User profile data:', data);
+            // Handle initial sign-in state. (Determine if user is already signed in.)
+            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+            document.getElementById('google-signin-btn').addEventListener('click', handleAuthClick);
+            document.getElementById('google-signout-btn').addEventListener('click', handleSignoutClick);
         });
     }
+
+    function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('google-signin-btn').style.display = 'none';
+            document.getElementById('google-signout-btn').style.display = 'block';
+            getPrimaryCalendarId();
+        } else {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('google-signin-btn').style.display = 'block';
+            document.getElementById('google-signout-btn').style.display = 'none';
+        }
+    }
+
+    function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+    }
+
+    function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+        localStorage.removeItem('access_token');
+        window.location.href = redirectUri;
+    }
+
+    function getPrimaryCalendarId() {
+        gapi.client.calendar.calendarList.list().then(response => {
+            const primaryCalendar = response.result.items.find(calendar => calendar.primary);
+            if (primaryCalendar) {
+                updateCalendarIframe(primaryCalendar.id);
+            }
+        });
+    }
+
+    function updateCalendarIframe(calendarId) {
+        const iframe = document.getElementById('calendar-iframe');
+        iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=America/New_York`;
+    }
+
+    handleClientLoad();
 });
