@@ -3,52 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web App</title>
-    
+    <title>Customer Service Web App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Header Section -->
     <header>
-        <h1>Welcome to My Web App</h1>
+        <div class="logo">YourLogo</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="login-signup">
+            <button class="btn login">Login</button>
+            <button class="btn signup">Sign Up</button>
+        </div>
     </header>
-    <main>
-        <section>
-            <h2>About This App</h2>
-            <p>This is a sample web application integrated with Make.com scenarios.</p>
-            <div id="result"></div>
-        </section>
-        <section>
-            <h2>Form Submission</h2>
-            <form id="makeForm">
-                <label for="data">Enter Data:</label>
-                <input type="text" id="data" name="data" required>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 My Web App</p>
-    </footer>
-    <script>
-        document.getElementById('makeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const data = document.getElementById('data').value;
-            fetch('https://hook.us1.make.com/hbk0aj8apwfv0gepdesq2ttcjp27ahzb', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ data: data })
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.log('Success:', result);
-                document.getElementById('result').innerHTML = `<p>${result.results[0].result}</p>`;
 
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    </script>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay">
+            <h1>Revolutionize Your Customer Service Experience</h1>
+            <p>Efficient call logs and seamless scheduling</p>
+            <button class="btn cta">Get Started Now</button>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main>
+        <div class="container">
+            <!-- Left Column: Call Logs -->
+            <div class="left-column">
+                <h2>Recent Call Logs</h2>
+                <input type="text" class="search-bar" placeholder="Search logs...">
+                <div class="call-log-list">
+                    <div class="call-log-entry">
+                        <div class="caller-name">John Doe</div>
+                        <div class="call-details">
+                            <span class="call-date">2024-07-24</span>
+                            <span class="call-time">10:30 AM</span>
+                            <span class="call-duration">5 mins</span>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn view">View Details</button>
+                            <button class="btn delete">Delete</button>
+                        </div>
+                    </div>
+                    <!-- Repeat similar blocks for other call logs -->
+                </div>
+                <div class="pagination">
+                    <button class="btn prev">Previous</button>
+                    <button class="btn next">Next</button>
+                </div>
+            </div>
+
+            <!-- Right Column: Google Calendar -->
+            <div class="right-column">
+                <h2>Your Schedule</h2>
+                <button class="btn add-event">Add New Event</button>
+                <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id&ctz=your_timezone"
+                    style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="feature-icon1.png" alt="Feature 1">
+                    <h3>Efficient Call Management</h3>
+                    <p>Handle your calls with ease and efficiency.</p>
+                </div>
+                <!-- Repeat for other features -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial">
+                    <img src="user1.jpg" alt="User 1">
+                    <p>"This app has transformed our customer service process!"</p>
+                    <h3>Jane Smith</h3>
+                    <p>CEO, Company XYZ</p>
+                </div>
+                <!-- Repeat for other testimonials -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@example.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                        <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                        <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <input type="email" placeholder="Your email">
+                    <button class="btn subscribe">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
