@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('google-signout-btn').addEventListener('click', () => {
         console.log('Sign out button clicked');
         localStorage.removeItem('access_token');
-        window.location.href = redirectUri; // Redirect to the correct URI after logout
+        window.location.href = 'https://hypnos.site/webapp'; // Redirect to the correct URI after logout
     });
 
     // Handle OAuth 2.0 response
