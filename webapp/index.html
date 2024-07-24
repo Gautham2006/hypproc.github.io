@@ -42,7 +42,7 @@
             .then(response => response.json())
             .then(result => {
                 console.log('Success:', result);
-                document.getElementById('result').innerHTML = `<p>${result}</p>`;
+                document.getElementById('result').innerHTML = `<p>${result['result']}</p>`;
             })
             .catch(error => {
                 console.error('Error:', error);
