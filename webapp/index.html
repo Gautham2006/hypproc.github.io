@@ -42,7 +42,8 @@
             .then(response => response.json())
             .then(result => {
                 console.log('Success:', result);
-                document.getElementById('result').innerHTML = `<p>${result[0]['result']}</p>`;
+                document.getElementById('result').innerHTML = `<p>${result.results[0].result}</p>`;
+
             })
             .catch(error => {
                 console.error('Error:', error);
