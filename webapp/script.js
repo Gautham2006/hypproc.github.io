@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
-    const apiKey = 'AIzaSyBRS0bjckLHDkuEtbrBkGdzPKINMga0Uhk'; // Replace with your actual API key
-    const redirectUri = 'https://hypnos.site/webapp'; // Ensure this matches the registered URI exactly
-    const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+    const redirectUri = 'https://hypnos.site/webapp'; // Replace with your actual redirect URI
+    const scope = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
     const discoveryDocs = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
     console.log('Page loaded');
