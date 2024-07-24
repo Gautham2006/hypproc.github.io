@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Sign out functionality
     document.getElementById('google-signout-btn').addEventListener('click', () => {
         localStorage.removeItem('access_token');
-        window.location.href = 'https://www.hypnos.site/webapp';
+        window.location.href = redirectUri;
     });
 
     // Handle OAuth 2.0 response
