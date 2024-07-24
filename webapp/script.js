@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
         displayDashboard();
     } else if (localStorage.getItem('access_token')) {
         console.log('Access token found in localStorage');
+        document.getElementById('hero').style.display = 'none';
         displayDashboard();
     } else {
         console.log('No access token found');
