@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
     const redirectUri = 'https://hypnos.site/webapp'; // Replace with your actual redirect URI
     const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+    const vapiApiKey = '4fbaf626-ab56-4cc6-b400-b4dc071a730c'; // Replace with your actual vapi.ai API key
 
     console.log('Page loaded');
 
@@ -12,9 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = authUrl;
     });
 
-    //get started
+    // Get started button click event
     document.getElementById('getstarted').addEventListener('click', () => {
-        console.log('get started button clicked');
+        console.log('Get started button clicked');
         const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${encodeURIComponent(scope)}`;
         window.location.href = authUrl;
     });
@@ -68,19 +69,8 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error fetching calendar list:', error);
         });
 
-        // Fetch call logs from VAPI API
-        const options = {
-            method: 'GET',
-            headers: { Authorization: 'Bearer 1c33ba3f-8c46-4a26-aa2f-049a86f96b0c' }
-        };
-
-        fetch('https://api.vapi.ai/call/15bf45b6-3556-4b05-9ecd-2a280d393175', options)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Call Logs:', data);
-                updateCallLogs(data);
-            })
-            .catch(err => console.error('Error fetching call logs:', err));
+        // Fetch and display call logs
+        fetchCallLogs();
     }
 
     function updateCalendarIframe(calendarId) {
@@ -89,25 +79,45 @@ document.addEventListener("DOMContentLoaded", function() {
         iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=America/New_York`;
     }
 
-    function updateCallLogs(callLogs) {
+    function fetchCallLogs() {
+        fetch('https://api.vapi.ai/v1/call-logs', {
+            headers: {
+                'Authorization': `Bearer ${vapiApiKey}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Call Logs:', data);
+            displayCallLogs(data);
+        })
+        .catch(error => {
+            console.error('Error fetching call logs:', error);
+        });
+    }
+
+    function displayCallLogs(callLogs) {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
+
         callLogs.forEach(log => {
             const logEntry = document.createElement('div');
             logEntry.className = 'call-log-entry';
+
             logEntry.innerHTML = `
-                <div class="caller-name">${log.callerName}</div>
+                <div class="caller-name">${log.caller_name}</div>
                 <div class="call-details">
-                    <span class="call-date">${log.date}</span>
-                    <span class="call-time">${log.time}</span>
-                    <span class="call-duration">${log.duration}</span>
-                    <span class="call-status ${log.status.toLowerCase()}">${log.status}</span>
+                    <span class="call-date">${new Date(log.timestamp).toLocaleDateString()}</span>
+                    <span class="call-time">${new Date(log.timestamp).toLocaleTimeString()}</span>
+                    <span class="call-duration">${log.duration} mins</span>
+                    <span class="call-status ${log.status}">${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
                 </div>
                 <div class="actions">
                     <button class="btn view">View Details</button>
                     <button class="btn delete">Delete</button>
                 </div>
             `;
+
             callLogList.appendChild(logEntry);
         });
     }
