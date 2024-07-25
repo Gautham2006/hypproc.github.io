@@ -66,12 +66,20 @@
             justify-content: center;
             margin-top: 20px;
         }
+        .login-signup {
+            text-align: right;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
     <div class="header">
         <h1>Customer Service Dashboard</h1>
+        <div class="login-signup">
+            <button class="btn" id="google-signin-btn">Login with Google</button>
+            <button class="btn" id="google-signout-btn" style="display: none;">Logout</button>
+        </div>
     </div>
 
     <!-- Dashboard Section -->
@@ -135,6 +143,20 @@
             document.getElementById(tabName).style.display = "block";
             event.currentTarget.className += " active";
         }
+
+        document.getElementById('google-signin-btn').addEventListener('click', function() {
+            // Simulate sign-in
+            document.getElementById('google-signin-btn').style.display = 'none';
+            document.getElementById('google-signout-btn').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'block';
+        });
+
+        document.getElementById('google-signout-btn').addEventListener('click', function() {
+            // Simulate sign-out
+            document.getElementById('google-signin-btn').style.display = 'block';
+            document.getElementById('google-signout-btn').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'none';
+        });
     </script>
 </body>
 </html>
