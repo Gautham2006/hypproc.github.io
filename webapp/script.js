@@ -79,55 +79,61 @@ document.addEventListener("DOMContentLoaded", function() {
         iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=America/New_York`;
     }
 
-    function fetchCallLogs() {
-        const options = {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${vapiApiKey}`
-            }
-        };
+    const jwt = require('jsonwebtoken');
+
+    const orgId = '7db8f0b6-9aa0-4ec8-9b1f-99a9b635a1a3';
+    const privateKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c';
+
+     const payload = { orgId };
+     const options = { expiresIn: '1h' };
+
+     // Generate the token
+     const token = jwt.sign(payload, privateKey, options);
+
+function fetchCallLogs() {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}` // Use the generated JWT token here
+        }
+    };
+
+    fetch('https://api.vapi.ai/call', options) // Note: using /call endpoint, not /log
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error fetching call logs: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Call Logs:', data);
+        displayCallLogs(data);
+    })
+    .catch(error => {
+        console.error('Error fetching call logs:', error);
+    });
+}
     
-        fetch('https://api.vapi.ai/log?page=1&limit=50&sortOrder=DESC', options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error fetching call logs: ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Call Logs:', data);
-            displayCallLogs(data.results);
-        })
-        .catch(error => {
-            console.error('Error fetching call logs:', error);
-        });
-    }
-    
-    function displayCallLogs(callLogs) {
-        const callLogList = document.getElementById('call-log-list');
-        callLogList.innerHTML = ''; // Clear existing logs
+function displayCallLogs(callLogs) {
+    const callLogList = document.getElementById('call-log-list');
+    callLogList.innerHTML = ''; // Clear existing logs
 
-        callLogs.forEach(log => {
-            const logEntry = document.createElement('div');
-            logEntry.className = 'call-log-entry';
+    callLogs.forEach(log => {
+        const logEntry = document.createElement('div');
+        logEntry.className = 'call-log-entry';
 
-            logEntry.innerHTML = `
-                <div class="caller-name">${log.caller_name}</div>
-                <div class="call-details">
-                    <span class="call-date">${new Date(log.timestamp).toLocaleDateString()}</span>
-                    <span class="call-time">${new Date(log.timestamp).toLocaleTimeString()}</span>
-                    <span class="call-duration">${log.duration} mins</span>
-                    <span class="call-status ${log.status}">${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
-                </div>
-                <div class="actions">
-                    <button class="btn view">View Details</button>
-                    <button class="btn delete">Delete</button>
-                </div>
-            `;
+        logEntry.innerHTML = `
+            <div class="call-details">
+                <span class="call-type">${log.type}</span>
+                <span class="call-status">${log.status}</span>
+                <span class="call-date">${new Date(log.createdAt).toLocaleDateString()}</span>
+                <span class="call-time">${new Date(log.createdAt).toLocaleTimeString()}</span>
+            </div>
+        `;
 
-            callLogList.appendChild(logEntry);
-        });
-    }
+        callLogList.appendChild(logEntry);
+    });
+}
 
     // Tab switching functionality
     window.openTab = function(event, tabName) {
