@@ -104,41 +104,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Set default tab to open
     document.querySelector(".tab-link").click();
-
-// Fetch call logs from VAPI API
-const options = {
-    method: 'GET',
-    headers: { Authorization: 'Bearer 1c33ba3f-8c46-4a26-aa2f-049a86f96b0c' }
-    };
-    fetch('https://api.vapi.ai/call/15bf45b6-3556-4b05-9ecd-2a280d393175', options)
-    .then(response => response.json())
-    .then(data => {
-    console.log('Call Logs:', data);
-    updateCallLogs(data);
-})
-    .catch(err => console.error('Error fetching call logs:', err));
-}
-                          
-            function updateCallLogs(callLogs) {
-                const callLogList = document.getElementById('call-log-list');
-                callLogList.innerHTML = ''; // Clear existing logs
-                callLogs.forEach(log => {
-                    const logEntry = document.createElement('div');
-                    logEntry.className = 'call-log-entry';
-                    logEntry.innerHTML = `
-                        <div class="caller-name">${log.callerName}</div>
-                        <div class="call-details">
-                            <span class="call-date">${log.date}</span>
-                            <span class="call-time">${log.time}</span>
-                            <span class="call-duration">${log.duration}</span>
-                            <span class="call-status ${log.status.toLowerCase()}">${log.status}</span>
-                        </div>
-                        <div class="actions">
-                            <button class="btn view">View Details</button>
-                            <button class="btn delete">Delete</button>
-                        </div>
-                    `;
-                    callLogList.appendChild(logEntry);
-                });
-            }
 });
