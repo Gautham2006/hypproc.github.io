@@ -3,160 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Service Dashboard</title>
+    <title>Customer Service Web App</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        .header, .footer {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            background-color: #007bff;
-        }
-        .tab-link {
-            padding: 10px 20px;
-            cursor: pointer;
-            color: white;
-            border: none;
-            background: none;
-            outline: none;
-        }
-        .tab-link.active {
-            background-color: white;
-            color: #007bff;
-        }
-        .tab-content {
-            display: none;
-            padding: 20px;
-            background-color: white;
-            border: 2px solid #007bff;
-            margin: 20px;
-            border-radius: 8px;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .call-log-entry {
-            display: flex;
-            justify-content: space-between;
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .call-details span {
-            margin-right: 10px;
-        }
-        .actions button {
-            margin-left: 5px;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .login-signup {
-            text-align: right;
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
 <body>
     <!-- Header Section -->
-    <div class="header">
-        <h1>Customer Service Dashboard</h1>
-        <div class="login-signup">
-            <button class="btn" id="google-signin-btn">Login with Google</button>
-            <button class="btn" id="google-signout-btn" style="display: none;">Logout</button>
+    <header style="padding: 30px;">
+        <div class="logo">
+            <img src="Images/thelogo.png" alt="Customer Service AI Agent Logo">
         </div>
-    </div>
+        <div class="login-signup">
+            <button class="btn login" id="google-signin-btn">Login with Google</button>
+            <button class="btn logout" id="google-signout-btn" style="display: none;">Logout</button>
+        </div>
+    </header>
 
     <!-- Dashboard Section -->
-    <section class="dashboard">
-        <div class="tabs">
-            <button class="tab-link active" onclick="openTab(event, 'CallLogs')">Call Logs</button>
-            <button class="tab-link" onclick="openTab(event, 'Calendar')">Schedule</button>
-            <button class="tab-link" onclick="openTab(event, 'Analytics')">Analytics</button>
-        </div>
-        <div class="tab-content active" id="CallLogs">
-            <h2>Recent Call Logs</h2>
-            <input type="text" class="search-bar" placeholder="Search logs...">
-            <div class="call-log-list">
-                <div class="call-log-entry">
-                    <div class="caller-name">John Doe</div>
-                    <div class="call-details">
-                        <span class="call-date">2024-07-24</span>
-                        <span class="call-time">10:30 AM</span>
-                        <span class="call-duration">5 mins</span>
-                        <span class="call-status completed">Completed</span>
+    <section class="dashboard" id="dashboard" style="display:none;">
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-link active" onclick="openTab(event, 'CallLogs')">Call Logs</button>
+                <button class="tab-link" onclick="openTab(event, 'Calendar')">Calendar</button>
+                <button class="tab-link" onclick="openTab(event, 'Analytics')">Analytics</button>
+            </div>
+            <div class="tab-content" id="CallLogs">
+                <h2>Recent Call Logs</h2>
+                <input type="text" class="search-bar" placeholder="Search logs...">
+                <div class="call-log-list">
+                    <div class="call-log-entry">
+                        <div class="caller-name">John Doe</div>
+                        <div class="call-details">
+                            <span class="call-date">2024-07-24</span>
+                            <span class="call-time">10:30 AM</span>
+                            <span class="call-duration">5 mins</span>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn view">View Details</button>
+                            <button class="btn delete">Delete</button>
+                        </div>
                     </div>
-                    <div class="actions">
-                        <button class="btn view">View Details</button>
-                        <button class="btn delete">Delete</button>
-                    </div>
+                    <!-- More call log entries can go here -->
                 </div>
-                <!-- More call log entries can go here -->
+                <div class="pagination">
+                    <button class="btn prev">Previous</button>
+                    <button class="btn next">Next</button>
+                </div>
             </div>
-            <div class="pagination">
-                <button class="btn prev">Previous</button>
-                <button class="btn next">Next</button>
+
+            <div class="tab-content" id="Calendar" style="display:none;">
+                <h2>Your Schedule</h2>
+                <iframe id="calendar-iframe" src="" style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
             </div>
-        </div>
-        <div class="tab-content" id="Calendar">
-            <h2>Your Schedule</h2>
-            <iframe id="calendar-iframe" src="" style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
-        </div>
-        <div class="tab-content" id="Analytics">
-            <h2>Analytics</h2>
-            <!-- Add your analytics content here -->
+
+            <div class="tab-content" id="Analytics" style="display:none;">
+                <h2>Analytics</h2>
+                <!-- Add your analytics content here -->
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2024 Customer Service Dashboard. All rights reserved.</p>
-    </div>
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@example.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                        <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                        <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <input type="email" placeholder="Your email">
+                    <button class="btn subscribe">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- JavaScript -->
-    <script>
-        function openTab(event, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tab-link");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            event.currentTarget.className += " active";
-        }
-
-        document.getElementById('google-signin-btn').addEventListener('click', function() {
-            // Simulate sign-in
-            document.getElementById('google-signin-btn').style.display = 'none';
-            document.getElementById('google-signout-btn').style.display = 'block';
-            document.getElementById('dashboard').style.display = 'block';
-        });
-
-        document.getElementById('google-signout-btn').addEventListener('click', function() {
-            // Simulate sign-out
-            document.getElementById('google-signin-btn').style.display = 'block';
-            document.getElementById('google-signout-btn').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'none';
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
