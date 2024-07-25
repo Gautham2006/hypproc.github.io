@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
     
-        fetch('https://api.vapi.ai/log', options)
+        fetch('https://api.vapi.ai/log?page=1&limit=50&sortOrder=DESC', options)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching call logs: ${response.statusText}`);
