@@ -3,74 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabbed Interface</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .tab {
-            display: none;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .tabs {
-            display: flex;
-            cursor: pointer;
-        }
-        .tab-label {
-            padding: 10px 20px;
-            background-color: #f1f1f1;
-            border: 1px solid #ccc;
-            margin-right: 2px;
-            border-bottom: none;
-        }
-        .tab-label.active {
-            background-color: #fff;
-            border-top: 2px solid #007bff;
-            border-right: 2px solid #007bff;
-            border-left: 2px solid #007bff;
-        }
-        .tab-content {
-            border: 2px solid #007bff;
-            padding: 20px;
-        }
-    </style>
+    <title>Customer Service Web App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="tabs">
-        <div class="tab-label active" onclick="showTab(0)">Call Logs</div>
-        <div class="tab-label" onclick="showTab(1)">Schedule</div>
-        <div class="tab-label" onclick="showTab(2)">Analytics</div>
-    </div>
-    
-    <div id="tab-0" class="tab-content active">
-        <h2>Call Logs</h2>
-        <p>Placeholder content for Call Logs.</p>
-    </div>
-    <div id="tab-1" class="tab-content">
-        <h2>Schedule</h2>
-        <p>Placeholder content for Schedule.</p>
-    </div>
-    <div id="tab-2" class="tab-content">
-        <h2>Analytics</h2>
-        <p>Placeholder content for Analytics.</p>
-    </div>
+    <!-- Header Section -->
+    <header style="padding: 30px;">
+        <div class="logo">
+            <img src="Images/thelogo.png" alt="Customer Service AI Agent Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="login-signup">
+            <button class="btn login" id="google-signin-btn">Login with Google</button>
+            <button class="btn logout" id="google-signout-btn" style="display: none;">Logout</button>
+        </div>
+    </header>
 
-    <script>
-        function showTab(tabIndex) {
-            var tabs = document.getElementsByClassName('tab-content');
-            var labels = document.getElementsByClassName('tab-label');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-                labels[i].classList.remove('active');
-            }
-            tabs[tabIndex].classList.add('active');
-            labels[tabIndex].classList.add('active');
-        }
-    </script>
+    <!-- Hero Section -->
+    <section class="hero" id="indexhero">
+        <div class="hero-overlay">
+            <h1>Revolutionize Your Customer Service Experience</h1>
+            <p>Efficient call logs and seamless scheduling</p>
+            <button class="btn cta" id="getstarted">Get Started Now</button>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard" id="dashboard" style="display:none;">
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-link active" onclick="openTab(event, 'CallLogs')">Call Logs</button>
+                <button class="tab-link" onclick="openTab(event, 'Calendar')">Calendar</button>
+                <button class="tab-link" onclick="openTab(event, 'Analytics')">Analytics</button>
+            </div>
+            <div class="tab-content" id="CallLogs">
+                <h2>Recent Call Logs</h2>
+                <input type="text" class="search-bar" placeholder="Search logs...">
+                <div class="call-log-list">
+                    <div class="call-log-entry">
+                        <div class="caller-name">John Doe</div>
+                        <div class="call-details">
+                            <span class="call-date">2024-07-24</span>
+                            <span class="call-time">10:30 AM</span>
+                            <span class="call-duration">5 mins</span>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn view">View Details</button>
+                            <button class="btn delete">Delete</button>
+                        </div>
+                    </div>
+                    <div class="call-log-entry">
+                        <div class="caller-name">John Doe2</div>
+                        <div class="call-details">
+                            <span class="call-date">2024-07-24</span>
+                            <span class="call-time">10:30 AM</span>
+                            <span class="call-duration">5 mins</span>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn view">View Details</button>
+                            <button class="btn delete">Delete</button>
+                        </div>
+                    </div>
+                    <div class="call-log-entry">
+                        <div class="caller-name">John3 Doe</div>
+                        <div class="call-details">
+                            <span class="call-date">2024-07-24</span>
+                            <span class="call-time">10:30 AM</span>
+                            <span class="call-duration">5 mins</span>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn view">View Details</button>
+                            <button class="btn delete">Delete</button>
+                        </div>
+                    </div>
+                    <div class="call-log-entry">
+                        <div class="caller-name">John4 Doe</div>
+                        <div class="call-details">
+                            <span class="call-date">2024-07-24</span>
+                            <span class="call-time">10:30 AM</span>
+                            <span class="call-duration">5 mins</span>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn view">View Details</button>
+                            <button class="btn delete">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination">
+                    <button class="btn prev">Previous</button>
+                    <button class="btn next">Next</button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="Calendar" style="display:none;">
+                <h2>Your Schedule</h2>
+                <iframe id="calendar-iframe" src="" style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+            </div>
+
+            <div class="tab-content" id="Analytics" style="display:none;">
+                <h2>Analytics</h2>
+                <!-- Add your analytics content here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@example.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                        <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                        <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <input type="email" placeholder="Your email">
+                    <button class="btn subscribe">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
