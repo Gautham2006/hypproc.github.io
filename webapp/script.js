@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
     const redirectUri = 'https://hypnos.site/webapp'; // Replace with your actual redirect URI
     const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
-    const vapiApiKey = '4fbaf626-ab56-4cc6-b400-b4dc071a730c'; // Replace with your actual vapi.ai API key
+    const vapiApiKey = '4fbaf626-ab56-4cc6-b400-b4dc071a730c'; // Replace with your actual Vapi.ai API key
 
     console.log('Page loaded');
 
@@ -80,16 +80,24 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function fetchCallLogs() {
-        fetch('https://api.vapi.ai/v1/call-logs', {
+        const options = {
+            method: 'GET',
             headers: {
                 'Authorization': `Bearer ${vapiApiKey}`,
                 'Content-Type': 'application/json'
             }
+        };
+
+        fetch('https://api.vapi.ai/log', options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error fetching call logs: ${response.statusText}`);
+            }
+            return response.json();
         })
-        .then(response => response.json())
         .then(data => {
             console.log('Call Logs:', data);
-            displayCallLogs(data);
+            displayCallLogs(data.results);
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
