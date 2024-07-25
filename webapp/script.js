@@ -80,15 +80,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function fetchCallLogs() {
-        // const options = {
-        //     method: 'GET',
-        //     headers: {
-        //         'Authorization': 'Bearer ${vapiApiKey}'
-        //     }
-        // };
-
-        const options = {method: 'GET', headers: {Authorization: 'Bearer ${vapiApiKey}' }};
-
+        const options = {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${vapiApiKey}`
+            }
+        };
+    
         fetch('https://api.vapi.ai/log', options)
         .then(response => {
             if (!response.ok) {
@@ -104,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error fetching call logs:', error);
         });
     }
-
+    
     function displayCallLogs(callLogs) {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
