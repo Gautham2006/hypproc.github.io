@@ -27,6 +27,7 @@ header {
 
 header .logo img {
     height: 50px;
+    /*padding-left: 20%;*/
 }
 
 header nav ul {
