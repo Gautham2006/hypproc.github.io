@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     //get started
-    document.getElementById('getstarted').addEventListener('click', () => {
-        console.log('get started button clicked');
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${encodeURIComponent(scope)}`;
-        window.location.href = authUrl;
-    });
+    // document.getElementById('getstarted').addEventListener('click', () => {
+    //     console.log('get started button clicked');
+    //     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${encodeURIComponent(scope)}`;
+    //     window.location.href = authUrl;
+    // });
 
     // Sign out functionality
     document.getElementById('google-signout-btn').addEventListener('click', () => {
@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log('Access token found in URL');
         const accessToken = window.location.hash.split('&')[0].split('=')[1];
         localStorage.setItem('access_token', accessToken);
-        document.getElementById('hero').style.display = 'none';
+        //document.getElementById('hero').style.display = 'none';
         displayDashboard();
     } else if (localStorage.getItem('access_token')) {
         console.log('Access token found in localStorage');
-        document.getElementById('hero').style.display = 'none';
+        //document.getElementById('hero').style.display = 'none';
         displayDashboard();
     } else {
         console.log('No access token found');
