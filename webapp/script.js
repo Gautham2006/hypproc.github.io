@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log('Access token found in URL');
         const accessToken = window.location.hash.split('&')[0].split('=')[1];
         localStorage.setItem('access_token', accessToken);
-        //document.getElementById('hero').style.display = 'none';
+        document.getElementById('indexhero').style.display = 'none';
         displayDashboard();
     } else if (localStorage.getItem('access_token')) {
         console.log('Access token found in localStorage');
-        //document.getElementById('hero').style.display = 'none';
+        document.getElementById('indexhero').style.display = 'none';
         displayDashboard();
     } else {
         console.log('No access token found');
