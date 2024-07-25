@@ -26,7 +26,7 @@
                 <button class="tab-link" onclick="openTab(event, 'Calendar')">Calendar</button>
                 <button class="tab-link" onclick="openTab(event, 'Analytics')">Analytics</button>
             </div>
-            <div class="tab-content" id="CallLogs" style="display:block;">
+            <div class="tab-content" id="CallLogs">
                 <h2>Recent Call Logs</h2>
                 <input type="text" class="search-bar" placeholder="Search logs...">
                 <div class="call-log-list">
@@ -51,12 +51,12 @@
                 </div>
             </div>
 
-            <div class="tab-content" id="Calendar">
+            <div class="tab-content" id="Calendar" style="display:none;">
                 <h2>Your Schedule</h2>
                 <iframe id="calendar-iframe" src="" style="border: 0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
             </div>
 
-            <div class="tab-content" id="Analytics">
+            <div class="tab-content" id="Analytics" style="display:none;">
                 <h2>Analytics</h2>
                 <!-- Add your analytics content here -->
             </div>
@@ -111,6 +111,18 @@
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
         }
+
+        document.getElementById('google-signin-btn').addEventListener('click', function() {
+            document.getElementById('google-signin-btn').style.display = 'none';
+            document.getElementById('google-signout-btn').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'block';
+        });
+
+        document.getElementById('google-signout-btn').addEventListener('click', function() {
+            document.getElementById('google-signin-btn').style.display = 'block';
+            document.getElementById('google-signout-btn').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'none';
+        });
     </script>
 </body>
 </html>
