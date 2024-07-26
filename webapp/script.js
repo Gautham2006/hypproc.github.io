@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             console.log('Call Logs:', data);
-            displayCallLogs(data.results);
+            displayCallLogs(data);
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
