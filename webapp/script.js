@@ -202,10 +202,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 analyticsEntry.innerHTML = `
                     <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
-                    <p>Customer Satisfaction: ${log.csat || 'N/A'}</p>
-                    <p>Resolution Status: ${log.endedReason === 'resolved' ? 'Resolved' : 'Not Resolved'}</p>
-                    <p>First Call Resolution: ${log.endedReason === 'resolved' && log.messages.length === 1 ? 'Yes' : 'No'}</p>
-                    <p>Call Abandonment: ${log.endedReason === 'abandoned' ? 'Yes' : 'No'}</p>
+                    <p>${log.analytics.structuredData.AHT}</p>
+                    <p>${log.analytics.structuredData.CSAT}</p>
+                    <p>${log.analytics.structuredData.FCR}</p>
+                    <p>${log.analytics.structuredData.NPS}</p>
+                    <p>${log.analytics.structuredData.RT}</p>
                 `;
 
                 analyticsSection.appendChild(analyticsEntry);
