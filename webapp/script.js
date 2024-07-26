@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
 
-        fetch('https://api.vapi.ai/call', options)
+        fetch('https://api.vapi.ai/call?limit=100', options)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching call logs: ${response.statusText}`);
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             console.log('Call Logs:', data);
-            displayCallLogs(data); // Directly pass the data
+            displayCallLogs(data);
             displayAnalytics(data); // Call the function to display analytics
         })
         .catch(error => {
@@ -162,13 +162,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Function to display call logs
     function displayCallLogs(callLogs) {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
 
         callLogs.forEach(log => {
-            if(log.summary){
+            if (log.summary) {
                 const logEntry = document.createElement('div');
                 logEntry.className = 'call-log-entry';
 
@@ -191,26 +190,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayAnalytics(callLogs) {
-        const analyticsSection = document.getElementById('Analytics');
+        const analyticsSection = document.getElementById('analytics-section');
         analyticsSection.innerHTML = ''; // Clear existing content
 
         callLogs.forEach(log => {
-            console.log(log);
-            if (log.summary) {
+            if (log.analysis && log.analysis.structuredData) {
                 const analyticsEntry = document.createElement('div');
                 analyticsEntry.className = 'analytics-entry';
-                if(log.analytics.structuredData)
-                {
-                    analyticsEntry.innerHTML = `
-                        <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
-                        <p>${log.analysis.structuredData.AHT}</p>
-                        <p>${log.analysis.structuredData.CSAT}</p>
-                        <p>${log.analysis.structuredData.FCR}</p>
-                        <p>${log.analysis.structuredData.NPS}</p>
-                        <p>${log.analysis.structuredData.RT}</p>
-                    `;
-                }
-                
+
+                analyticsEntry.innerHTML = `
+                    <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
+                    <p>AHT: ${log.analysis.structuredData.AHT}</p>
+                    <p>CSAT: ${log.analysis.structuredData.CSAT}</p>
+                    <p>FCR: ${log.analysis.structuredData.FCR}</p>
+                    <p>NPS: ${log.analysis.structuredData.NPS}</p>
+                    <p>RT: ${log.analysis.structuredData.RT}</p>
+                `;
 
                 analyticsSection.appendChild(analyticsEntry);
             }
