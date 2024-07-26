@@ -142,19 +142,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 'Authorization': `Bearer ${vapiApiKey}`
             }
         };
-
+    
         fetch(`https://api.vapi.ai/call/${id}`, options)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error deleting call log: ${response.statusText}`);
             }
             // Remove the log entry from the DOM
-            element.parentElement.parentElement.remove();
+            const logEntry = element.closest('.call-log-entry');
+            logEntry.remove();
         })
         .catch(error => {
             console.error('Error deleting call log:', error);
         });
-    }
+    };
+    
 
     // Tab switching functionality
     window.openTab = function(event, tabName) {
