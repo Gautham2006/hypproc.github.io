@@ -195,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
         analyticsSection.innerHTML = ''; // Clear existing content
 
         callLogs.forEach(log => {
+            console.log(log);
             if (log.summary) {
                 const analyticsEntry = document.createElement('div');
                 analyticsEntry.className = 'analytics-entry';
