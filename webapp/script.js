@@ -190,33 +190,27 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Function to display analytics
     function displayAnalytics(callLogs) {
-        const analyticsSection = document.getElementById('Analytics');
+        const analyticsSection = document.getElementById('analytics-section');
         analyticsSection.innerHTML = ''; // Clear existing content
 
-        // Calculate KPIs
-        const totalCalls = callLogs.length;
-        const resolvedCalls = callLogs.filter(log => log.status === 'ended' && log.endedReason === 'resolved').length;
-        const customerSatisfaction = callLogs.reduce((acc, log) => acc + (log.csat || 0), 0) / totalCalls;
-        const averageHandlingTime = callLogs.reduce((acc, log) => acc + ((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60), 0) / totalCalls;
-        const firstCallResolution = resolvedCalls / totalCalls * 100;
-        const callAbandonmentRate = callLogs.filter(log => log.endedReason === 'abandoned').length / totalCalls * 100;
+        callLogs.forEach(log => {
+            if (log.summary) {
+                const analyticsEntry = document.createElement('div');
+                analyticsEntry.className = 'analytics-entry';
 
-        // Display KPIs
-        const kpiHtml = `
-            <h3>Key Performance Indicators</h3>
-            <p>Total Calls: ${totalCalls}</p>
-            <p>Resolved Calls: ${resolvedCalls}</p>
-            <p>Customer Satisfaction: ${customerSatisfaction.toFixed(2)} / 10</p>
-            <p>Average Handling Time: ${averageHandlingTime.toFixed(2)} mins</p>
-            <p>First Call Resolution: ${firstCallResolution.toFixed(2)}%</p>
-            <p>Call Abandonment Rate: ${callAbandonmentRate.toFixed(2)}%</p>
-        `;
+                analyticsEntry.innerHTML = `
+                    <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
+                    <p>Customer Satisfaction: ${log.csat || 'N/A'}</p>
+                    <p>Resolution Status: ${log.endedReason === 'resolved' ? 'Resolved' : 'Not Resolved'}</p>
+                    <p>First Call Resolution: ${log.endedReason === 'resolved' && log.messages.length === 1 ? 'Yes' : 'No'}</p>
+                    <p>Call Abandonment: ${log.endedReason === 'abandoned' ? 'Yes' : 'No'}</p>
+                `;
 
-        analyticsSection.innerHTML = kpiHtml;
+                analyticsSection.appendChild(analyticsEntry);
+            }
+        });
     }
-
     
 
     window.deleteLog = function(id, buttonElement) {
