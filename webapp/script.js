@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     
 
-    function deleteLog(id, element) {
+    window.deleteLog = function(id, element) {
         const options = {
             method: 'DELETE',
             headers: {
