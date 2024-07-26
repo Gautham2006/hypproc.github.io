@@ -112,18 +112,18 @@ document.addEventListener("DOMContentLoaded", function() {
             logEntry.className = 'call-log-entry';
 
             logEntry.innerHTML = `
-                <div class="caller-name">Caller: ${log.analysis ? log.analysis.summary : 'Unknown'}</div>
+                
                 <div class="call-details">
                     <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
                     <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
                     <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
                     <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
                     <span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
-                    <span class="call-cost">Cost: $${log.cost}</span>
-                    <span class="call-reason">Ended Reason: ${log.endedReason || 'N/A'}</span>
+                    
+                    
                 </div>
                 <div class="actions">
-                    <button class="btn view" onclick="viewDetails('${log.id}')">View Details</button>
+                    
                     <button class="btn delete" onclick="deleteLog('${log.id}')">Delete</button>
                     
                 </div>
@@ -133,14 +133,27 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function viewDetails(id) {
-        // Function to view detailed information about the call log
-        console.log('View details for log ID:', id);
-    }
+    
 
-    function deleteLog(id) {
-        // Function to delete the call log
-        console.log('Delete log with ID:', id);
+    function deleteLog(id, element) {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${vapiApiKey}`
+            }
+        };
+
+        fetch(`https://api.vapi.ai/call/${id}`, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error deleting call log: ${response.statusText}`);
+            }
+            // Remove the log entry from the DOM
+            element.parentElement.parentElement.remove();
+        })
+        .catch(error => {
+            console.error('Error deleting call log:', error);
+        });
     }
 
     // Tab switching functionality
