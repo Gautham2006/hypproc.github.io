@@ -150,16 +150,17 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!response.ok) {
                 throw new Error(`Error deleting call log: ${response.statusText}`);
             }
+            fetchCallLogs()
             // Remove the log entry from the DOM
-            let logEntry = buttonElement.parentNode; // actions div
-            logEntry = logEntry.parentNode; // call-log-entry div
-            logEntry.parentNode.removeChild(logEntry);
+            // let logEntry = buttonElement.parentNode; // actions div
+            // logEntry = logEntry.parentNode; // call-log-entry div
+            // logEntry.parentNode.removeChild(logEntry);
         })
         .catch(error => {
             console.error('Error deleting call log:', error);
         });
 
-        fetchCallLogs()
+        
     };
     
     
