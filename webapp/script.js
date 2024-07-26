@@ -199,15 +199,18 @@ document.addEventListener("DOMContentLoaded", function() {
             if (log.summary) {
                 const analyticsEntry = document.createElement('div');
                 analyticsEntry.className = 'analytics-entry';
-
-                analyticsEntry.innerHTML = `
-                    <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
-                    <p>${log.analysis.structuredData.AHT}</p>
-                    <p>${log.analysis.structuredData.CSAT}</p>
-                    <p>${log.analysis.structuredData.FCR}</p>
-                    <p>${log.analysis.structuredData.NPS}</p>
-                    <p>${log.analysis.structuredData.RT}</p>
-                `;
+                if(log.analytics.structuredData)
+                {
+                    analyticsEntry.innerHTML = `
+                        <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
+                        <p>${log.analysis.structuredData.AHT}</p>
+                        <p>${log.analysis.structuredData.CSAT}</p>
+                        <p>${log.analysis.structuredData.FCR}</p>
+                        <p>${log.analysis.structuredData.NPS}</p>
+                        <p>${log.analysis.structuredData.RT}</p>
+                    `;
+                }
+                
 
                 analyticsSection.appendChild(analyticsEntry);
             }
