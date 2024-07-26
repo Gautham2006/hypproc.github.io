@@ -108,30 +108,32 @@ document.addEventListener("DOMContentLoaded", function() {
         callLogList.innerHTML = ''; // Clear existing logs
 
         callLogs.forEach(log => {
-            const logEntry = document.createElement('div');
-            logEntry.className = 'call-log-entry';
+            if(log.summary){
+                const logEntry = document.createElement('div');
+                logEntry.className = 'call-log-entry';
 
-            logEntry.innerHTML = `
+                logEntry.innerHTML = `
+                    
+                    <div class="call-details">
+                        <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
+                        <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
+                        <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
+                        <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
+                        <span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
+                        
+                        
+                    </div>
+                    <div class="actions">
+                        
+                        <button class="btn delete" onclick="deleteLog('${log.id}',this)">Delete</button>
+                        
+                    </div>
+                `;
+
                 
-                <div class="call-details">
-                    <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
-                    <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
-                    <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
-                    <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
-                    <span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
-                    
-                    
-                </div>
-                <div class="actions">
-                    
-                    <button class="btn delete" onclick="deleteLog('${log.id}',this)">Delete</button>
-                    
-                </div>
-            `;
 
-            
-
-            callLogList.appendChild(logEntry);
+                callLogList.appendChild(logEntry);
+            }
         });
     }
 
