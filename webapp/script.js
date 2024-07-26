@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 'Authorization': `Bearer ${vapiApiKey}`
             }
         };
-    
+
         fetch('https://api.vapi.ai/call', options)
         .then(response => {
             if (!response.ok) {
@@ -96,13 +96,13 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             console.log('Call Logs:', data);
-            displayCallLogs(data);
+            displayCallLogs(data.results); // Use .results to match the JSON structure
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
         });
     }
-    
+
     function displayCallLogs(callLogs) {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
@@ -112,11 +112,11 @@ document.addEventListener("DOMContentLoaded", function() {
             logEntry.className = 'call-log-entry';
     
             logEntry.innerHTML = `
-                <div class="caller-name">Caller: ${log.caller_name}</div>
+                <div class="caller-name">Caller: ${log.analysis.summary}</div>
                 <div class="call-details">
-                    <span class="call-date">Date: ${new Date(log.timestamp).toLocaleDateString()}</span>
-                    <span class="call-time">Time: ${new Date(log.timestamp).toLocaleTimeString()}</span>
-                    <span class="call-duration">Duration: ${log.duration} mins</span>
+                    <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
+                    <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
+                    <span class="call-duration">Duration: ${(new Date(log.endedAt) - new Date(log.startedAt)) / 1000} secs</span>
                     <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
                     <span class="call-summary">Summary: ${log.summary}</span>
                     <span class="call-cost">Cost: $${log.cost}</span>
@@ -135,6 +135,18 @@ document.addEventListener("DOMContentLoaded", function() {
             callLogList.appendChild(logEntry);
         });
     }
+    
+
+    function viewDetails(id) {
+        // Function to view detailed information about the call log
+        console.log('View details for log ID:', id);
+    }
+
+    function deleteLog(id) {
+        // Function to delete the call log
+        console.log('Delete log with ID:', id);
+    }
+
     // Tab switching functionality
     window.openTab = function(event, tabName) {
         // Get all elements with class="tab-content" and hide them
