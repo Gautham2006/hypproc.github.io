@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayAnalytics(callLogs) {
-        const analyticsSection = document.getElementById('analytics-section');
+        const analyticsSection = document.getElementById('Analytics');
         analyticsSection.innerHTML = ''; // Clear existing content
 
         callLogs.forEach(log => {
