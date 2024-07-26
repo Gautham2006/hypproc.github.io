@@ -129,6 +129,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             `;
 
+            
+
             callLogList.appendChild(logEntry);
         });
     }
@@ -156,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => {
             console.error('Error deleting call log:', error);
         });
+
+        fetchCallLogs()
     };
     
     
