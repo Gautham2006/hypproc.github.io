@@ -94,14 +94,14 @@ function fetchCallLogs() {
     const options = {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}` // Use the generated JWT token here
+            'Authorization': `Bearer ${vapiApiKey}`
         }
     };
 
-    fetch('https://api.vapi.ai/call', options) // Note: using /call endpoint, not /log
+    fetch('https://api.vapi.ai/call', options)
     .then(response => {
         if (!response.ok) {
-            throw new Error(`Error fetching call logs: ${response.statusText}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.json();
     })
