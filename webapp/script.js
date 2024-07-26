@@ -202,11 +202,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 analyticsEntry.innerHTML = `
                     <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
-                    <p>${log.analytics.structuredData.AHT}</p>
-                    <p>${log.analytics.structuredData.CSAT}</p>
-                    <p>${log.analytics.structuredData.FCR}</p>
-                    <p>${log.analytics.structuredData.NPS}</p>
-                    <p>${log.analytics.structuredData.RT}</p>
+                    <p>${log.analysis.structuredData.AHT}</p>
+                    <p>${log.analysis.structuredData.CSAT}</p>
+                    <p>${log.analysis.structuredData.FCR}</p>
+                    <p>${log.analysis.structuredData.NPS}</p>
+                    <p>${log.analysis.structuredData.RT}</p>
                 `;
 
                 analyticsSection.appendChild(analyticsEntry);
