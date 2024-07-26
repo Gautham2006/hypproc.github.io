@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             console.log('Call Logs:', data);
-            displayCallLogs(data.results); // Use .results to match the JSON structure
+            displayCallLogs(data); // Directly pass the data
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
@@ -106,21 +106,21 @@ document.addEventListener("DOMContentLoaded", function() {
     function displayCallLogs(callLogs) {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
-    
+
         callLogs.forEach(log => {
             const logEntry = document.createElement('div');
             logEntry.className = 'call-log-entry';
-    
+
             logEntry.innerHTML = `
-                <div class="caller-name">Caller: ${log.analysis.summary}</div>
+                <div class="caller-name">Caller: ${log.analysis ? log.analysis.summary : 'Unknown'}</div>
                 <div class="call-details">
                     <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
                     <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
-                    <span class="call-duration">Duration: ${(new Date(log.endedAt) - new Date(log.startedAt)) / 1000} secs</span>
+                    <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
                     <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
-                    <span class="call-summary">Summary: ${log.summary}</span>
+                    <span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
                     <span class="call-cost">Cost: $${log.cost}</span>
-                    <span class="call-reason">Ended Reason: ${log.endedReason}</span>
+                    <span class="call-reason">Ended Reason: ${log.endedReason || 'N/A'}</span>
                 </div>
                 <div class="actions">
                     <button class="btn view" onclick="viewDetails('${log.id}')">View Details</button>
@@ -131,11 +131,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     </audio>
                 </div>
             `;
-    
+
             callLogList.appendChild(logEntry);
         });
     }
-    
 
     function viewDetails(id) {
         // Function to view detailed information about the call log
