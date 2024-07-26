@@ -125,10 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="actions">
                     <button class="btn view" onclick="viewDetails('${log.id}')">View Details</button>
                     <button class="btn delete" onclick="deleteLog('${log.id}')">Delete</button>
-                    <audio controls>
-                        <source src="${log.recordingUrl}" type="audio/wav">
-                        Your browser does not support the audio element.
-                    </audio>
+                    
                 </div>
             `;
 
