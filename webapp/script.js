@@ -79,6 +79,64 @@ document.addEventListener("DOMContentLoaded", function() {
         iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=America/New_York`;
     }
 
+    // function fetchCallLogs() {
+    //     const options = {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': `Bearer ${vapiApiKey}`
+    //         }
+    //     };
+
+    //     fetch('https://api.vapi.ai/call', options)
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error(`Error fetching call logs: ${response.statusText}`);
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         console.log('Call Logs:', data);
+    //         displayCallLogs(data); // Directly pass the data
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching call logs:', error);
+    //     });
+    // }
+
+    // function displayCallLogs(callLogs) {
+    //     const callLogList = document.getElementById('call-log-list');
+    //     callLogList.innerHTML = ''; // Clear existing logs
+
+    //     callLogs.forEach(log => {
+    //         if(log.summary){
+    //             const logEntry = document.createElement('div');
+    //             logEntry.className = 'call-log-entry';
+
+    //             logEntry.innerHTML = `
+                    
+    //                 <div class="call-details">
+    //                     <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
+    //                     <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
+    //                     <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
+    //                     <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
+    //                     <span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
+                        
+                        
+    //                 </div>
+    //                 <div class="actions">
+                        
+    //                     <button class="btn delete" onclick="deleteLog('${log.id}',this)">Delete</button>
+                        
+    //                 </div>
+    //             `;
+
+                
+
+    //             callLogList.appendChild(logEntry);
+    //         }
+    //     });
+    // }
+
     function fetchCallLogs() {
         const options = {
             method: 'GET',
@@ -97,12 +155,14 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log('Call Logs:', data);
             displayCallLogs(data); // Directly pass the data
+            displayAnalytics(data); // Call the function to display analytics
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
         });
     }
 
+    // Function to display call logs
     function displayCallLogs(callLogs) {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
@@ -113,28 +173,48 @@ document.addEventListener("DOMContentLoaded", function() {
                 logEntry.className = 'call-log-entry';
 
                 logEntry.innerHTML = `
-                    
                     <div class="call-details">
                         <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
                         <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
                         <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
                         <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
                         <span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
-                        
-                        
                     </div>
                     <div class="actions">
-                        
-                        <button class="btn delete" onclick="deleteLog('${log.id}',this)">Delete</button>
-                        
+                        <button class="btn delete" onclick="deleteLog('${log.id}', this)">Delete</button>
                     </div>
                 `;
-
-                
 
                 callLogList.appendChild(logEntry);
             }
         });
+    }
+
+    // Function to display analytics
+    function displayAnalytics(callLogs) {
+        const analyticsSection = document.getElementById('Analytics');
+        analyticsSection.innerHTML = ''; // Clear existing content
+
+        // Calculate KPIs
+        const totalCalls = callLogs.length;
+        const resolvedCalls = callLogs.filter(log => log.status === 'ended' && log.endedReason === 'resolved').length;
+        const customerSatisfaction = callLogs.reduce((acc, log) => acc + (log.csat || 0), 0) / totalCalls;
+        const averageHandlingTime = callLogs.reduce((acc, log) => acc + ((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60), 0) / totalCalls;
+        const firstCallResolution = resolvedCalls / totalCalls * 100;
+        const callAbandonmentRate = callLogs.filter(log => log.endedReason === 'abandoned').length / totalCalls * 100;
+
+        // Display KPIs
+        const kpiHtml = `
+            <h3>Key Performance Indicators</h3>
+            <p>Total Calls: ${totalCalls}</p>
+            <p>Resolved Calls: ${resolvedCalls}</p>
+            <p>Customer Satisfaction: ${customerSatisfaction.toFixed(2)} / 10</p>
+            <p>Average Handling Time: ${averageHandlingTime.toFixed(2)} mins</p>
+            <p>First Call Resolution: ${firstCallResolution.toFixed(2)}%</p>
+            <p>Call Abandonment Rate: ${callAbandonmentRate.toFixed(2)}%</p>
+        `;
+
+        analyticsSection.innerHTML = kpiHtml;
     }
 
     
