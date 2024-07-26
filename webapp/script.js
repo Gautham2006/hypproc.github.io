@@ -106,29 +106,35 @@ document.addEventListener("DOMContentLoaded", function() {
     function displayCallLogs(callLogs) {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
-
+    
         callLogs.forEach(log => {
             const logEntry = document.createElement('div');
             logEntry.className = 'call-log-entry';
-
+    
             logEntry.innerHTML = `
-                <div class="caller-name">${log.caller_name}</div>
+                <div class="caller-name">Caller: ${log.caller_name}</div>
                 <div class="call-details">
-                    <span class="call-date">${new Date(log.timestamp).toLocaleDateString()}</span>
-                    <span class="call-time">${new Date(log.timestamp).toLocaleTimeString()}</span>
-                    <span class="call-duration">${log.duration} mins</span>
-                    <span class="call-status ${log.status}">${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
+                    <span class="call-date">Date: ${new Date(log.timestamp).toLocaleDateString()}</span>
+                    <span class="call-time">Time: ${new Date(log.timestamp).toLocaleTimeString()}</span>
+                    <span class="call-duration">Duration: ${log.duration} mins</span>
+                    <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
+                    <span class="call-summary">Summary: ${log.summary}</span>
+                    <span class="call-cost">Cost: $${log.cost}</span>
+                    <span class="call-reason">Ended Reason: ${log.endedReason}</span>
                 </div>
                 <div class="actions">
-                    <button class="btn view">View Details</button>
-                    <button class="btn delete">Delete</button>
+                    <button class="btn view" onclick="viewDetails('${log.id}')">View Details</button>
+                    <button class="btn delete" onclick="deleteLog('${log.id}')">Delete</button>
+                    <audio controls>
+                        <source src="${log.recordingUrl}" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
                 </div>
             `;
-
+    
             callLogList.appendChild(logEntry);
         });
     }
-
     // Tab switching functionality
     window.openTab = function(event, tabName) {
         // Get all elements with class="tab-content" and hide them
