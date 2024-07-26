@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div class="actions">
                     
-                    <button class="btn delete" onclick="deleteLog('${log.id}')">Delete</button>
+                    <button class="btn delete" onclick="deleteLog('${log.id}',this)">Delete</button>
                     
                 </div>
             `;
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 'Authorization': `Bearer ${vapiApiKey}`
             }
         };
-    
+        
         fetch(`https://api.vapi.ai/call/${id}`, options)
         .then(response => {
             if (!response.ok) {
