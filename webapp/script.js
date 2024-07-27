@@ -263,9 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Set default tab to open
     document.querySelector(".tab-link").click();
 
-    document.getElementById('theme-toggle').addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-}
+
 });
 
 
