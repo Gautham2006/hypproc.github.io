@@ -7,6 +7,7 @@ body, html {
     color: #1c1e21;
     min-height: 100vh;
     overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
 }
 
 body.dark-mode {
@@ -130,11 +131,11 @@ header .login-signup .btn:hover {
 .feature-card {
     background: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 250px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 body.dark-mode .feature-card {
@@ -143,6 +144,7 @@ body.dark-mode .feature-card {
 
 .feature-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .feature-card img {
@@ -239,4 +241,126 @@ footer {
 
 .theme-toggle:hover {
     background: #333;
+}
+
+/* Dashboard */
+.dashboard {
+    background: #fff;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.dashboard h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #1877f2;
+}
+
+body.dark-mode .dashboard {
+    background: #242526;
+    color: #e4e6eb;
+}
+
+.dashboard .search-bar {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.dashboard .call-log-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.dashboard .call-log-entry {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark-mode .dashboard .call-log-entry {
+    background: rgba(36, 37, 38, 0.8);
+}
+
+.dashboard .call-log-entry:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard .call-log-entry .caller-name {
+    font-weight: bold;
+    color: #333;
+}
+
+body.dark-mode .dashboard .call-log-entry .caller-name {
+    color: #e4e6eb;
+}
+
+.dashboard .call-log-entry .call-details {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dashboard .call-log-entry .call-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.dashboard .call-log-entry .call-status.completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+body.dark-mode .dashboard .call-log-entry .call-status.completed {
+    background: #0d8c6e;
+    color: #d4edda;
+}
+
+.dashboard .actions .btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dashboard .actions .btn.view {
+    background: #1877f2;
+    color: #fff;
+}
+
+.dashboard .actions .btn.delete {
+    background: #dc3545;
+    color: #fff;
+}
+
+.dashboard .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dashboard .pagination .btn {
+    padding: 10px 20px;
+    background: #1877f2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dashboard .pagination .btn:hover {
+    background: #0056b3;
 }
