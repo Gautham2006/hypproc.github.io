@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; // Replace with your actual Vapi.ai API key
 
     console.log('Page loaded');
-
+    
     // Google OAuth Sign-In
     document.getElementById('google-signin-btn').addEventListener('click', () => {
         console.log('Sign in button clicked');
@@ -262,4 +262,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Set default tab to open
     document.querySelector(".tab-link").click();
+
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+}
 });
+
+
+
