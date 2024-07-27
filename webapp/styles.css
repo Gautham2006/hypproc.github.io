@@ -57,11 +57,15 @@ nav .nav-left {
 }
 
 nav .nav-center {
+    display: flex;
     justify-content: center;
+    flex: 1;
 }
 
 nav .nav-right {
+    display: flex;
     justify-content: flex-end;
+    flex: 1;
 }
 
 nav ul li {
