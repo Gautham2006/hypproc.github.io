@@ -114,6 +114,22 @@ header .login-signup .btn:hover {
     opacity: 0.9;
 }
 
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
 /* Tabs */
 .tabs {
     display: flex;
@@ -144,131 +160,6 @@ body.dark-mode .tab-link {
 .tab-link:hover, .tab-link.active {
     background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Hero Section */
-.hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.hero p {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #555;
-}
-
-.hero .btn.cta {
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.hero .btn.cta:hover {
-    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
-    transform: translateY(-2px);
-}
-
-/* Features Section */
-.features {
-    padding: 60px 20px;
-    text-align: center;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
-}
-
-.features h2 {
-    font-size: 32px;
-    margin-bottom: 40px;
-    color: #007bff;
-}
-
-.features-grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.feature-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-body.dark-mode .feature-card {
-    background: #242526;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-.feature-card img {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-body.dark-mode .feature-card h3 {
-    color: #e4e6eb;
-}
-
-/* Footer */
-footer {
-    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-}
-
-footer p {
-    margin: 0;
-    font-size: 14px;
-}
-
-/* Theme Toggle Button */
-.theme-toggle {
-    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.theme-toggle:hover {
-    background: linear-gradient(135deg, #0056b3 0%, #004080 100%);
     transform: translateY(-2px);
 }
 
@@ -413,4 +304,18 @@ body.dark-mode .dashboard .call-log-entry .call-status.completed {
 .dashboard .pagination .btn:hover {
     background: linear-gradient(135deg, #0056b3 0%, #004080 100%);
     transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
 }
