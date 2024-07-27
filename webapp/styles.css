@@ -27,7 +27,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -80,25 +80,23 @@ nav ul li a:hover {
 }
 
 header .login-signup .btn {
-    padding: 8px 15px;
+    padding: 10px 20px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
     font-size: 14px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: #fff;
 }
 
 header .login-signup .login {
-    background: #f0f2f5;
-    color: #1e3c72;
-    border: 1px solid #1e3c72;
+    background: #ffffff;
+    color: #007bff;
+    border: 1px solid #007bff;
 }
 
-header .login-signup .signup {
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+header .login-signup .logout {
+    background: #ff4b5c;
     color: #fff;
 }
 
@@ -116,8 +114,8 @@ header .login-signup .btn:hover {
 
 .tab-link {
     background: #fff;
-    color: #1e3c72;
-    border: 1px solid #1e3c72;
+    color: #007bff;
+    border: 1px solid #007bff;
     padding: 10px 20px;
     border-radius: 20px;
     cursor: pointer;
@@ -135,7 +133,7 @@ body.dark-mode .tab-link {
 }
 
 .tab-link:hover, .tab-link.active {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
     transform: translateY(-2px);
 }
@@ -190,7 +188,7 @@ body.dark-mode .tab-link {
 .features h2 {
     font-size: 32px;
     margin-bottom: 40px;
-    color: #1e3c72;
+    color: #007bff;
 }
 
 .features-grid {
@@ -237,7 +235,7 @@ body.dark-mode .feature-card h3 {
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -305,7 +303,7 @@ footer {
 
 /* Theme Toggle Button */
 .theme-toggle {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -333,7 +331,7 @@ footer {
 .dashboard h2 {
     font-size: 32px;
     margin-bottom: 20px;
-    color: #1e3c72;
+    color: #007bff;
 }
 
 body.dark-mode .dashboard {
@@ -414,12 +412,12 @@ body.dark-mode .dashboard .call-log-entry .call-status.completed {
     transition: background 0.3s, transform 0.3s;
     font-size: 14px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
 }
 
 .dashboard .actions .btn.view {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
 }
 
@@ -442,7 +440,7 @@ body.dark-mode .dashboard .call-log-entry .call-status.completed {
 
 .dashboard .pagination .btn {
     padding: 10px 20px;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
     color: #fff;
     border: none;
     border-radius: 20px;
