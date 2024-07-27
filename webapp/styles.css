@@ -305,6 +305,11 @@ footer {
     transform: translateY(-2px);
 }
 
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
     background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
