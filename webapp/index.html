@@ -83,66 +83,75 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
-    <script>
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-        });
+<script>
+document.getElementById('theme-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    const themeIcon = document.getElementById('theme-icon');
+    if (document.body.classList.contains('dark-mode')) {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+    } else {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
+});
 
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var iframe = document.getElementById("calendar-iframe");
+    
+    iframe.onload = function() {
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+        // Create a new style element
+        var style = document.createElement("style");
+        style.type = "text/css";
+
+        // Add your custom styles here
+        var css = `
+            body {
+                background: #18191a !important;
+                color: #e4e6eb !important;
             }
-            tablinks = document.getElementsByClassName("tab-link");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            .goog-cal-header,
+            .goog-cal-toolbar {
+                background: #333 !important;
             }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
+            .goog-cal-weekgrid-header,
+            .goog-cal-monthgrid-header,
+            .goog-cal-weekgrid-label {
+                background: #444 !important;
+                color: #e4e6eb !important;
+            }
+            .goog-cal-event {
+                background: #007bff !important;
+                color: #fff !important;
+            }
+            .goog-cal-weekgrid-time-column,
+            .goog-cal-weekgrid-times {
+                color: #e4e6eb !important;
+            }
+        `;
 
-        document.addEventListener("DOMContentLoaded", function() {
-            var iframe = document.getElementById("calendar-iframe");
-            
-            iframe.onload = function() {
-                var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        // Apply the CSS styles
+        style.appendChild(document.createTextNode(css));
+        iframeDoc.head.appendChild(style);
+    };
+});
+</script>
 
-                // Create a new style element
-                var style = document.createElement("style");
-                style.type = "text/css";
-
-                // Add your custom styles here
-                var css = `
-                    body {
-                        background: #18191a !important;
-                        color: #e4e6eb !important;
-                    }
-                    .goog-cal-header,
-                    .goog-cal-toolbar {
-                        background: #333 !important;
-                    }
-                    .goog-cal-weekgrid-header,
-                    .goog-cal-monthgrid-header,
-                    .goog-cal-weekgrid-label {
-                        background: #444 !important;
-                        color: #e4e6eb !important;
-                    }
-                    .goog-cal-event {
-                        background: #007bff !important;
-                        color: #fff !important;
-                    }
-                    .goog-cal-weekgrid-time-column,
-                    .goog-cal-weekgrid-times {
-                        color: #e4e6eb !important;
-                    }
-                `;
-
-                // Apply the CSS styles
-                style.appendChild(document.createTextNode(css));
-                iframeDoc.head.appendChild(style);
-            };
-        });
-    </script>
 </body>
 </html>
