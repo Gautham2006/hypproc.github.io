@@ -243,66 +243,7 @@ footer {
     color: #fff;
     padding: 20px 0;
     text-align: center;
-}
-
-.footer-columns {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.footer-column h3 {
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.footer-column ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-column ul li a {
-    color: #fff;
-    text-decoration: none;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.footer-column .social-icons a {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.footer-column .social-icons img {
-    width: 30px;
-    height: 30px;
-}
-
-.footer-column input[type="email"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 10px;
-    color: #000;
-}
-
-.footer-column .btn.subscribe {
-    width: 100%;
-    padding: 10px;
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.footer-column .btn.subscribe:hover {
-    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
-    transform: translateY(-2px);
+    position: relative;
 }
 
 footer p {
@@ -334,7 +275,8 @@ footer p {
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 0; /* Adjust to zero */
+    min-height: calc(100vh - 60px - 40px - 40px); /* Calculate based on header, padding, and footer */
 }
 
 .dashboard h2 {
