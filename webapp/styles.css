@@ -27,7 +27,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background: #1877f2;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -61,16 +61,18 @@ header .login-signup .btn {
     transition: background 0.3s, transform 0.3s;
     font-size: 14px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
 }
 
 header .login-signup .login {
     background: #f0f2f5;
-    color: #1877f2;
-    border: 1px solid #1877f2;
+    color: #1e3c72;
+    border: 1px solid #1e3c72;
 }
 
 header .login-signup .signup {
-    background: #42b72a;
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
     color: #fff;
 }
 
@@ -88,8 +90,8 @@ header .login-signup .btn:hover {
 
 .tab-link {
     background: #fff;
-    color: #1877f2;
-    border: 1px solid #1877f2;
+    color: #1e3c72;
+    border: 1px solid #1e3c72;
     padding: 10px 20px;
     border-radius: 20px;
     cursor: pointer;
@@ -107,7 +109,7 @@ body.dark-mode .tab-link {
 }
 
 .tab-link:hover, .tab-link.active {
-    background: #1877f2;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: #fff;
     transform: translateY(-2px);
 }
@@ -134,7 +136,7 @@ body.dark-mode .tab-link {
 }
 
 .hero .btn.cta {
-    background: #42b72a;
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
     color: #fff;
     padding: 15px 30px;
     border-radius: 5px;
@@ -145,7 +147,7 @@ body.dark-mode .tab-link {
 }
 
 .hero .btn.cta:hover {
-    background: #36a420;
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
     transform: translateY(-2px);
 }
 
@@ -162,7 +164,7 @@ body.dark-mode .tab-link {
 .features h2 {
     font-size: 32px;
     margin-bottom: 40px;
-    color: #1877f2;
+    color: #1e3c72;
 }
 
 .features-grid {
@@ -209,7 +211,7 @@ body.dark-mode .feature-card h3 {
 
 /* Footer */
 footer {
-    background: #1877f2;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -261,7 +263,7 @@ footer {
 .footer-column .btn.subscribe {
     width: 100%;
     padding: 10px;
-    background: #42b72a;
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -271,13 +273,13 @@ footer {
 }
 
 .footer-column .btn.subscribe:hover {
-    background: #36a420;
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
     transform: translateY(-2px);
 }
 
 /* Theme Toggle Button */
 .theme-toggle {
-    background: #1877f2;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -292,7 +294,7 @@ footer {
 }
 
 .theme-toggle:hover {
-    background: #0056b3;
+    background: linear-gradient(135deg, #0056b3 0%, #004080 100%);
     transform: translateY(-2px);
 }
 
@@ -309,7 +311,7 @@ footer {
 .dashboard h2 {
     font-size: 32px;
     margin-bottom: 20px;
-    color: #1877f2;
+    color: #1e3c72;
 }
 
 body.dark-mode .dashboard {
@@ -390,15 +392,17 @@ body.dark-mode .dashboard .call-log-entry .call-status.completed {
     transition: background 0.3s, transform 0.3s;
     font-size: 14px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
 }
 
 .dashboard .actions .btn.view {
-    background: #1877f2;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: #fff;
 }
 
 .dashboard .actions .btn.delete {
-    background: #dc3545;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: #fff;
 }
 
@@ -416,7 +420,7 @@ body.dark-mode .dashboard .call-log-entry .call-status.completed {
 
 .dashboard .pagination .btn {
     padding: 10px 20px;
-    background: #1877f2;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: #fff;
     border: none;
     border-radius: 20px;
@@ -426,6 +430,6 @@ body.dark-mode .dashboard .call-log-entry .call-status.completed {
 }
 
 .dashboard .pagination .btn:hover {
-    background: #0056b3;
+    background: linear-gradient(135deg, #0056b3 0%, #004080 100%);
     transform: translateY(-2px);
 }
