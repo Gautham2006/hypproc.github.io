@@ -3,8 +3,8 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #00B4DB, #0083B0);
-    color: #fff;
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: #000;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -22,12 +22,11 @@ header {
     align-items: center;
     padding: 20px 0;
     background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header .logo img {
     height: 50px;
-    /*padding-left: 20%;*/
 }
 
 header nav ul {
@@ -38,13 +37,13 @@ header nav ul {
 
 header nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #000;
     font-weight: bold;
     transition: color 0.3s;
 }
 
 header nav ul li a:hover {
-    color: #00B4DB;
+    color: #007BFF;
 }
 
 header .login-signup .btn {
@@ -56,18 +55,18 @@ header .login-signup .btn {
 }
 
 header .login-signup .login {
-    background: rgba(0, 180, 219, 0.3);
-    color: #fff;
-    border: 1px solid #00B4DB;
+    background: rgba(0, 123, 255, 0.3);
+    color: #000;
+    border: 1px solid #007BFF;
 }
 
 header .login-signup .signup {
-    background: #00B4DB;
+    background: #007BFF;
     color: #fff;
 }
 
 header .login-signup .btn:hover {
-    background: #0083B0;
+    background: #0056b3;
 }
 
 /* Hero Section */
@@ -81,7 +80,7 @@ header .login-signup .btn:hover {
     text-align: center;
     overflow: hidden;
 }
-/*lalalalal*/
+
 .hero-overlay {
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
@@ -102,7 +101,7 @@ header .login-signup .btn:hover {
 }
 
 .hero .btn.cta {
-    background: #00B4DB;
+    background: #007BFF;
     color: #fff;
     padding: 15px 30px;
     border-radius: 5px;
@@ -112,7 +111,7 @@ header .login-signup .btn:hover {
 }
 
 .hero .btn.cta:hover {
-    background: #0083B0;
+    background: #0056b3;
 }
 
 /* Features Section */
@@ -139,7 +138,7 @@ header .login-signup .btn:hover {
     background: rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 250px;
     text-align: center;
     transition: transform 0.3s;
@@ -258,7 +257,7 @@ footer {
 .footer-column .btn.subscribe {
     width: 100%;
     padding: 10px;
-    background: #00B4DB;
+    background: #007BFF;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -278,7 +277,7 @@ footer {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .left-column h2, .right-column h2 {
@@ -345,7 +344,7 @@ footer {
 }
 
 .actions .btn.view {
-    background: #00B4DB;
+    background: #007BFF;
     color: #fff;
 }
 
@@ -362,7 +361,7 @@ footer {
 
 .pagination .btn {
     padding: 10px 20px;
-    background: #00B4DB;
+    background: #007BFF;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -437,16 +436,17 @@ footer {
 }
 
 .tab-link {
-    background: rgba(0, 180, 219, 0.3);
-    color: #fff;
-    border: 1px solid #00B4DB;
+    background: rgba(0, 123, 255, 0.3);
+    color: #000;
+    border: 1px solid #007BFF;
     padding: 10px 20px;
     cursor: pointer;
     transition: background 0.3s;
 }
 
 .tab-link:hover, .tab-link.active {
-    background: #00B4DB;
+    background: #007BFF;
+    color: #fff;
 }
 
 .tab-content {
