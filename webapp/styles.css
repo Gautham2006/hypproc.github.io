@@ -7,6 +7,8 @@ body, html {
     color: #1c1e21;
     min-height: 100vh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
     transition: background 0.3s, color 0.3s;
 }
 
@@ -243,7 +245,7 @@ footer {
     color: #fff;
     padding: 20px 0;
     text-align: center;
-    position: relative;
+    margin-top: auto;
 }
 
 footer p {
@@ -276,7 +278,7 @@ footer p {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     margin-bottom: 0; /* Adjust to zero */
-    min-height: calc(100vh - 60px - 40px - 40px); /* Calculate based on header, padding, and footer */
+    flex-grow: 1;
 }
 
 .dashboard h2 {
