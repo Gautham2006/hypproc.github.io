@@ -26,7 +26,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 15px 30px;
     background: #1877f2;
     color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -39,7 +39,7 @@ header .logo img {
 header nav ul {
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 header nav ul li a {
@@ -54,7 +54,7 @@ header nav ul li a:hover {
 }
 
 header .login-signup .btn {
-    padding: 5px 15px;
+    padding: 8px 15px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -88,11 +88,13 @@ header .login-signup .btn:hover {
 .hero h1 {
     font-size: 48px;
     margin-bottom: 20px;
+    color: #333;
 }
 
 .hero p {
     font-size: 24px;
     margin-bottom: 20px;
+    color: #555;
 }
 
 .hero .btn.cta {
@@ -113,6 +115,10 @@ header .login-signup .btn:hover {
 .features {
     padding: 60px 20px;
     text-align: center;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
 }
 
 .features h2 {
@@ -250,6 +256,7 @@ footer {
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
+    margin-bottom: 40px;
 }
 
 .dashboard h2 {
