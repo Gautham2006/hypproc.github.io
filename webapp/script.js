@@ -79,64 +79,6 @@ document.addEventListener("DOMContentLoaded", function() {
         iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=America/New_York`;
     }
 
-    // function fetchCallLogs() {
-    //     const options = {
-    //         method: 'GET',
-    //         headers: {
-    //             'Authorization': `Bearer ${vapiApiKey}`
-    //         }
-    //     };
-
-    //     fetch('https://api.vapi.ai/call', options)
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error(`Error fetching call logs: ${response.statusText}`);
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         console.log('Call Logs:', data);
-    //         displayCallLogs(data); // Directly pass the data
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching call logs:', error);
-    //     });
-    // }
-
-    // function displayCallLogs(callLogs) {
-    //     const callLogList = document.getElementById('call-log-list');
-    //     callLogList.innerHTML = ''; // Clear existing logs
-
-    //     callLogs.forEach(log => {
-    //         if(log.summary){
-    //             const logEntry = document.createElement('div');
-    //             logEntry.className = 'call-log-entry';
-
-    //             logEntry.innerHTML = `
-                    
-    //                 <div class="call-details">
-    //                     <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
-    //                     <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
-    //                     <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
-    //                     <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
-    //                     <span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
-                        
-                        
-    //                 </div>
-    //                 <div class="actions">
-                        
-    //                     <button class="btn delete" onclick="deleteLog('${log.id}',this)">Delete</button>
-                        
-    //                 </div>
-    //             `;
-
-                
-
-    //             callLogList.appendChild(logEntry);
-    //         }
-    //     });
-    // }
-
     function fetchCallLogs() {
         const options = {
             method: 'GET',
@@ -193,25 +135,71 @@ document.addEventListener("DOMContentLoaded", function() {
         const analyticsSection = document.getElementById('analytics-section');
         analyticsSection.innerHTML = ''; // Clear existing content
 
+        const metrics = {
+            totalCalls: [],
+            avgCallDuration: [],
+            customerSatisfaction: [],
+            firstCallResolution: [],
+            netPromoterScore: []
+        };
+
         callLogs.forEach(log => {
             if (log.analysis && log.analysis.structuredData) {
-                const analyticsEntry = document.createElement('div');
-                analyticsEntry.className = 'analytics-entry';
-
-                analyticsEntry.innerHTML = `
-                    <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
-                    <p>AHT: ${log.analysis.structuredData.AHT}</p>
-                    <p>CSAT: ${log.analysis.structuredData.CSAT}</p>
-                    <p>FCR: ${log.analysis.structuredData.FCR}</p>
-                    <p>NPS: ${log.analysis.structuredData.NPS}</p>
-                    <p>RT: ${log.analysis.structuredData.RT}</p>
-                `;
-
-                analyticsSection.appendChild(analyticsEntry);
+                const date = new Date(log.createdAt).toLocaleDateString();
+                metrics.totalCalls.push({ date, value: log.analysis.structuredData.totalCalls });
+                metrics.avgCallDuration.push({ date, value: log.analysis.structuredData.avgCallDuration });
+                metrics.customerSatisfaction.push({ date, value: log.analysis.structuredData.customerSatisfaction });
+                metrics.firstCallResolution.push({ date, value: log.analysis.structuredData.firstCallResolution });
+                metrics.netPromoterScore.push({ date, value: log.analysis.structuredData.netPromoterScore });
             }
         });
+
+        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+        createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
+        createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
+        createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
+        createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
     }
-    
+
+    function createLineChart(canvasId, label, data) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        const chartData = {
+            labels: data.map(d => d.date),
+            datasets: [{
+                label: label,
+                data: data.map(d => d.value),
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.1
+            }]
+        };
+
+        const chartConfig = {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, chartConfig);
+    }
 
     window.deleteLog = function(id, buttonElement) {
         const options = {
@@ -226,21 +214,13 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!response.ok) {
                 throw new Error(`Error deleting call log: ${response.statusText}`);
             }
-            fetchCallLogs()
-            // Remove the log entry from the DOM
-            // let logEntry = buttonElement.parentNode; // actions div
-            // logEntry = logEntry.parentNode; // call-log-entry div
-            // logEntry.parentNode.removeChild(logEntry);
+            fetchCallLogs();
         })
         .catch(error => {
             console.error('Error deleting call log:', error);
         });
-
-        
     };
     
-    
-
     // Tab switching functionality
     window.openTab = function(event, tabName) {
         // Get all elements with class="tab-content" and hide them
