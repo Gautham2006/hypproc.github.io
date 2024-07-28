@@ -6,7 +6,6 @@
     <title>Customer Service Web App</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Header Section -->
@@ -66,12 +65,13 @@
 
                 <div class="tab-content" id="Analytics" style="display:none;">
                     <h2>Analytics</h2>
-                    <div id="analytics-section" class="analytics-grid">
-                        <canvas id="totalCallsChart"></canvas>
-                        <canvas id="avgCallDurationChart"></canvas>
-                        <canvas id="customerSatisfactionChart"></canvas>
-                        <canvas id="firstCallResolutionChart"></canvas>
-                        <canvas id="netPromoterScoreChart"></canvas>
+                    <div id="analytics-section">
+                        <!-- Add canvas elements for the charts -->
+                        <canvas id="totalCallsChart" width="400" height="200"></canvas>
+                        <canvas id="avgCallDurationChart" width="400" height="200"></canvas>
+                        <canvas id="customerSatisfactionChart" width="400" height="200"></canvas>
+                        <canvas id="firstCallResolutionChart" width="400" height="200"></canvas>
+                        <canvas id="netPromoterScoreChart" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
@@ -112,11 +112,15 @@
             }
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
+
+            if (tabName === 'Analytics') {
+                fetchCallLogs();
+            }
         }
 
         document.addEventListener("DOMContentLoaded", function() {
             var iframe = document.getElementById("calendar-iframe");
-            
+
             iframe.onload = function() {
                 var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
