@@ -312,6 +312,20 @@ body.dark-mode .dashboard .call-log-entry .call-status.completed {
     transform: translateY(-2px);
 }
 
+/* Analytics Grid */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
 /* Footer */
 footer {
     background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
