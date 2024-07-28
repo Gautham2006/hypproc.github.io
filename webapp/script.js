@@ -97,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log('Call Logs:', data);
             displayCallLogs(data);
-            displayAnalytics(data); // Call the function to display analytics
+            // Delay displaying analytics to ensure elements are in the DOM
+            setTimeout(() => displayAnalytics(data), 500); // Adjust delay if needed
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
@@ -242,6 +243,10 @@ document.addEventListener("DOMContentLoaded", function() {
         // Show the current tab and add an "active" class to the button that opened the tab
         document.getElementById(tabName).style.display = "block";
         event.currentTarget.className += " active";
+
+        if (tabName === 'Analytics') {
+            fetchCallLogs();
+        }
     }
 
     // Set default tab to open
