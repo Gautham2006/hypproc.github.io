@@ -68,9 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => {
             console.error('Error fetching calendar list:', error);
         });
-
-        // Fetch and display call logs
-        fetchCallLogs();
     }
 
     function updateCalendarIframe(calendarId) {
@@ -97,8 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log('Call Logs:', data);
             displayCallLogs(data);
-            // Wait for the DOM to be fully updated before displaying analytics
-            setTimeout(() => displayAnalytics(data), 1000);
+            setTimeout(() => displayAnalytics(data), 500); // Ensure DOM is ready
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
@@ -155,11 +151,14 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
-        createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
-        createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
-        createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
-        createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
+        // Ensure canvases are available before creating charts
+        setTimeout(() => {
+            createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+            createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
+            createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
+            createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
+            createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
+        }, 1000);
     }
 
     function createLineChart(canvasId, label, data) {
