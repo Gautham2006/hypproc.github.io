@@ -66,11 +66,12 @@
                 <div class="tab-content" id="Analytics" style="display:none;">
                     <h2>Analytics</h2>
                     <div id="analytics-section">
-                        <canvas id="totalCallsChart" width="400" height="200"></canvas>
-                        <canvas id="avgCallDurationChart" width="400" height="200"></canvas>
-                        <canvas id="customerSatisfactionChart" width="400" height="200"></canvas>
-                        <canvas id="firstCallResolutionChart" width="400" height="200"></canvas>
-                        <canvas id="netPromoterScoreChart" width="400" height="200"></canvas>
+                        <!-- Line charts for analytics -->
+                        <canvas id="totalCallsChart"></canvas>
+                        <canvas id="avgCallDurationChart"></canvas>
+                        <canvas id="customerSatisfactionChart"></canvas>
+                        <canvas id="firstCallResolutionChart"></canvas>
+                        <canvas id="netPromoterScoreChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -85,79 +86,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <script>
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            const themeIcon = document.getElementById('theme-icon');
-            if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            } else {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            }
-        });
-
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tab-link");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-
-            if (tabName === 'Analytics') {
-                fetchCallLogs();
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var iframe = document.getElementById("calendar-iframe");
-
-            iframe.onload = function() {
-                var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-                // Create a new style element
-                var style = document.createElement("style");
-                style.type = "text/css";
-
-                // Add your custom styles here
-                var css = `
-                    body {
-                        background: #18191a !important;
-                        color: #e4e6eb !important;
-                    }
-                    .goog-cal-header,
-                    .goog-cal-toolbar {
-                        background: #333 !important;
-                    }
-                    .goog-cal-weekgrid-header,
-                    .goog-cal-monthgrid-header,
-                    .goog-cal-weekgrid-label {
-                        background: #444 !important;
-                        color: #e4e6eb !important;
-                    }
-                    .goog-cal-event {
-                        background: #007bff !important;
-                        color: #fff !important;
-                    }
-                    .goog-cal-weekgrid-time-column,
-                    .goog-cal-weekgrid-times {
-                        color: #e4e6eb !important;
-                    }
-                `;
-
-                // Apply the CSS styles
-                style.appendChild(document.createTextNode(css));
-                iframeDoc.head.appendChild(style);
-            };
-        });
-    </script>
 </body>
 </html>
