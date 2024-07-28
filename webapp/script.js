@@ -68,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => {
             console.error('Error fetching calendar list:', error);
         });
+
+        // Fetch and display call logs immediately when the dashboard is displayed
+        fetchCallLogs();
     }
 
     function updateCalendarIframe(calendarId) {
@@ -94,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log('Call Logs:', data);
             displayCallLogs(data);
-            setTimeout(() => displayAnalytics(data), 500); // Ensure DOM is ready
+            // Save the call logs data for analytics
+            window.callLogsData = data;
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
@@ -151,14 +155,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // Ensure canvases are available before creating charts
-        setTimeout(() => {
-            createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
-            createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
-            createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
-            createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
-            createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
-        }, 1000);
+        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+        createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
+        createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
+        createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
+        createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
     }
 
     function createLineChart(canvasId, label, data) {
@@ -243,8 +244,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(tabName).style.display = "block";
         event.currentTarget.className += " active";
 
+        // Fetch and display analytics only when the Analytics tab is clicked
         if (tabName === 'Analytics') {
-            fetchCallLogs();
+            displayAnalytics(window.callLogsData);
         }
     }
 
