@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error fetching calendar list:', error);
         });
 
-        // Fetch and display call logs immediately when the dashboard is displayed
+        // Fetch and display call logs
         fetchCallLogs();
     }
 
@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log('Call Logs:', data);
             displayCallLogs(data);
-            // Save the call logs data for analytics
-            window.callLogsData = data;
+            // Wait for the DOM to be fully updated before displaying analytics
+            setTimeout(() => displayAnalytics(data), 1000);
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
@@ -147,24 +147,19 @@ document.addEventListener("DOMContentLoaded", function() {
         callLogs.forEach(log => {
             if (log.analysis && log.analysis.structuredData) {
                 const date = new Date(log.createdAt).toLocaleDateString();
-                metrics.totalCalls.push({ date, value: log.analysis.structuredData.totalCalls || 0 });
-                metrics.avgCallDuration.push({ date, value: log.analysis.structuredData.AHT || 0 });
-                metrics.customerSatisfaction.push({ date, value: log.analysis.structuredData.CSAT || 0 });
-                metrics.firstCallResolution.push({ date, value: log.analysis.structuredData.FCR || 0 });
-                metrics.netPromoterScore.push({ date, value: log.analysis.structuredData.NPS || 0 });
+                metrics.totalCalls.push({ date, value: parseFloat(log.analysis.structuredData.totalCalls) || 0 });
+                metrics.avgCallDuration.push({ date, value: parseFloat(log.analysis.structuredData.AHT) || 0 });
+                metrics.customerSatisfaction.push({ date, value: parseFloat(log.analysis.structuredData.CSAT) || 0 });
+                metrics.firstCallResolution.push({ date, value: parseFloat(log.analysis.structuredData.FCR) || 0 });
+                metrics.netPromoterScore.push({ date, value: parseFloat(log.analysis.structuredData.NPS) || 0 });
             }
         });
 
-        console.log('Metrics for charts:', metrics);
-
-        // Attempt to create charts after a short delay to ensure canvases are loaded
-        setTimeout(() => {
-            createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
-            createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
-            createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
-            createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
-            createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
-        }, 1000);
+        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+        createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
+        createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
+        createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
+        createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
     }
 
     function createLineChart(canvasId, label, data) {
@@ -250,9 +245,8 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(tabName).style.display = "block";
         event.currentTarget.className += " active";
 
-        // Fetch and display analytics only when the Analytics tab is clicked
         if (tabName === 'Analytics') {
-            displayAnalytics(window.callLogsData);
+            fetchCallLogs();
         }
     }
 
