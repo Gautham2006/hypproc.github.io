@@ -157,11 +157,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         console.log('Metrics for charts:', metrics);
 
-        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
-        createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
-        createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
-        createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
-        createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
+        // Attempt to create charts after a short delay to ensure canvases are loaded
+        setTimeout(() => {
+            createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+            createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
+            createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
+            createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
+            createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
+        }, 1000);
     }
 
     function createLineChart(canvasId, label, data) {
