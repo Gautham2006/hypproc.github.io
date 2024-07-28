@@ -243,4 +243,3 @@ document.addEventListener("DOMContentLoaded", function() {
     // Set default tab to open
     document.querySelector(".tab-link").click();
 });
-
