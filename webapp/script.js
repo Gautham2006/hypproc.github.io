@@ -146,11 +146,11 @@ document.addEventListener("DOMContentLoaded", function() {
         callLogs.forEach(log => {
             if (log.analysis && log.analysis.structuredData) {
                 const date = new Date(log.createdAt).toLocaleDateString();
-                metrics.totalCalls.push({ date, value: log.analysis.structuredData.AHT });
-                metrics.avgCallDuration.push({ date, value: log.analysis.structuredData.CSAT });
-                metrics.customerSatisfaction.push({ date, value: log.analysis.structuredData.FCR });
-                metrics.firstCallResolution.push({ date, value: log.analysis.structuredData.NPS });
-                metrics.netPromoterScore.push({ date, value: log.analysis.structuredData.RT });
+                metrics.totalCalls.push({ date, value: log.analysis.structuredData.totalCalls || 0 });
+                metrics.avgCallDuration.push({ date, value: log.analysis.structuredData.AHT || 0 });
+                metrics.customerSatisfaction.push({ date, value: log.analysis.structuredData.CSAT || 0 });
+                metrics.firstCallResolution.push({ date, value: log.analysis.structuredData.FCR || 0 });
+                metrics.netPromoterScore.push({ date, value: log.analysis.structuredData.NPS || 0 });
             }
         });
 
