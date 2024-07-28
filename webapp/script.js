@@ -97,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log('Call Logs:', data);
             displayCallLogs(data);
-            setTimeout(() => displayAnalytics(data), 500); // Ensure elements are in the DOM
+            // Wait for the DOM to be fully updated before displaying analytics
+            setTimeout(() => displayAnalytics(data), 1000);
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
