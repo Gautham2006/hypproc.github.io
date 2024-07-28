@@ -99,6 +99,8 @@ document.addEventListener("DOMContentLoaded", function() {
             displayCallLogs(data);
             // Save the call logs data for analytics
             window.callLogsData = data;
+            // Wait for the DOM to be fully updated before displaying analytics
+            setTimeout(() => displayAnalytics(data), 1000);
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
@@ -155,6 +157,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
+        console.log("Metrics for charts:", metrics);
+
         createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
         createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
         createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
@@ -164,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function createLineChart(canvasId, label, data) {
         const ctx = document.getElementById(canvasId);
+        console.log(`Attempting to create chart for ${canvasId}`);
         if (!ctx) {
             console.error(`Canvas element with id ${canvasId} not found.`);
             return;
