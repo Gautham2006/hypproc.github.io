@@ -146,11 +146,11 @@ document.addEventListener("DOMContentLoaded", function() {
         callLogs.forEach(log => {
             if (log.analysis && log.analysis.structuredData) {
                 const date = new Date(log.createdAt).toLocaleDateString();
-                metrics.totalCalls.push({ date, value: log.analysis.structuredData.totalCalls });
-                metrics.avgCallDuration.push({ date, value: log.analysis.structuredData.avgCallDuration });
-                metrics.customerSatisfaction.push({ date, value: log.analysis.structuredData.customerSatisfaction });
-                metrics.firstCallResolution.push({ date, value: log.analysis.structuredData.firstCallResolution });
-                metrics.netPromoterScore.push({ date, value: log.analysis.structuredData.netPromoterScore });
+                metrics.totalCalls.push({ date, value: log.analysis.structuredData.AHT });
+                metrics.avgCallDuration.push({ date, value: log.analysis.structuredData.CSAT });
+                metrics.customerSatisfaction.push({ date, value: log.analysis.structuredData.FCR });
+                metrics.firstCallResolution.push({ date, value: log.analysis.structuredData.NPS });
+                metrics.netPromoterScore.push({ date, value: log.analysis.structuredData.RT });
             }
         });
 
@@ -162,7 +162,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function createLineChart(canvasId, label, data) {
-        const ctx = document.getElementById(canvasId).getContext('2d');
+        const ctx = document.getElementById(canvasId);
+        if (!ctx) {
+            console.error(`Canvas element with id ${canvasId} not found.`);
+            return;
+        }
         const chartData = {
             labels: data.map(d => d.date),
             datasets: [{
@@ -198,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
 
-        new Chart(ctx, chartConfig);
+        new Chart(ctx.getContext('2d'), chartConfig);
     }
 
     window.deleteLog = function(id, buttonElement) {
