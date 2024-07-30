@@ -154,58 +154,58 @@ document.addEventListener("DOMContentLoaded", function() {
                 metrics.netPromoterScore.push({ date, value: parseFloat(log.analysis.structuredData.NPS) || 0 });
             }
         });
-
-        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
-        createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
-        createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
-        createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
-        createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
+//jdjdj
+        // createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+        // createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
+        // createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
+        // createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
+        // createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
     }
 
-    function createLineChart(canvasId, label, data) {
-        console.log(`Attempting to create chart for ${canvasId}`);
-        const ctx = document.getElementById(canvasId);
-        if (!ctx) {
-            console.error(`Canvas element with id ${canvasId} not found.`);
-            return;
-        }
-        const chartData = {
-            labels: data.map(d => d.date),
-            datasets: [{
-                label: label,
-                data: data.map(d => d.value),
-                fill: false,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                tension: 0.1
-            }]
-        };
+    // function createLineChart(canvasId, label, data) {
+    //     console.log(`Attempting to create chart for ${canvasId}`);
+    //     const ctx = document.getElementById(canvasId);
+    //     if (!ctx) {
+    //         console.error(`Canvas element with id ${canvasId} not found.`);
+    //         return;
+    //     }
+    //     const chartData = {
+    //         labels: data.map(d => d.date),
+    //         datasets: [{
+    //             label: label,
+    //             data: data.map(d => d.value),
+    //             fill: false,
+    //             borderColor: 'rgba(75, 192, 192, 1)',
+    //             tension: 0.1
+    //         }]
+    //     };
 
-        const chartConfig = {
-            type: 'line',
-            data: chartData,
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
-                    },
-                    y: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: 'Value'
-                        }
-                    }
-                }
-            }
-        };
+    //     const chartConfig = {
+    //         type: 'line',
+    //         data: chartData,
+    //         options: {
+    //             responsive: true,
+    //             scales: {
+    //                 x: {
+    //                     display: true,
+    //                     title: {
+    //                         display: true,
+    //                         text: 'Date'
+    //                     }
+    //                 },
+    //                 y: {
+    //                     display: true,
+    //                     title: {
+    //                         display: true,
+    //                         text: 'Value'
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     };
 
-        new Chart(ctx.getContext('2d'), chartConfig);
-    }
+    //     new Chart(ctx.getContext('2d'), chartConfig);
+    // }
 
     window.deleteLog = function(id, buttonElement) {
         const options = {
