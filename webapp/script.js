@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function() {
         callLogs.forEach(log => {
             if (log.analysis && log.analysis.structuredData) {
                 const analyticsEntry = document.createElement('div');
-                analyticsEntry.className = 'analytics-entry';
+                analyticsEntry.className = 'call-log-entry';
 
                 analyticsEntry.innerHTML = `
                     <h3>Call on ${new Date(log.createdAt).toLocaleDateString()} at ${new Date(log.createdAt).toLocaleTimeString()}</h3>
