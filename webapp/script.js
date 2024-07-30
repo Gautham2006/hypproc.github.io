@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
         analyticsSection.innerHTML = ''; // Clear existing content
 
         callLogs.forEach(log => {
-            if (log.analysis && log.analysis.structuredData) {
+            if (log.summary && log.analysis && log.analysis.structuredData) {
                 const analyticsEntry = document.createElement('div');
                 analyticsEntry.className = 'call-log-entry';
 
