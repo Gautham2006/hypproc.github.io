@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
     const redirectUri = 'https://hypnos.site/webapp'; // Replace with your actual redirect URI
     const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
-    const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; // Replace with your actual Vapi.ai API key
+    //const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; // Replace with your actual Vapi.ai API key
+    const vapiApiKey = '0bda626b-7fbe-443c-b376-f526a085f25a';
 
     console.log('Page loaded');
 
