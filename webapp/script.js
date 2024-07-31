@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //const vapiApiKey = '0bda626b-7fbe-443c-b376-f526a085f25a';
     
     let currentPage = 1;
-    const logsPerPage = 10;
+    let logsPerPage = 10; // Default logs per page
     let callLogs = [];
 
     console.log('Page loaded');
@@ -166,6 +166,12 @@ document.addEventListener("DOMContentLoaded", function() {
             currentPage++;
             displayCallLogs();
         }
+    });
+
+    document.getElementById('logsPerPage').addEventListener('change', (event) => {
+        logsPerPage = parseInt(event.target.value);
+        currentPage = 1; // Reset to first page
+        displayCallLogs();
     });
 
     function displayAnalytics(callLogs) {
