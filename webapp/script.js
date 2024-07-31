@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; // Replace with your actual client ID
-    const redirectUri = 'https://hypnos.site/webapp'; // Replace with your actual redirect URI
+    const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; 
+    const redirectUri = 'https://hypnos.site/webapp'; 
     const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
-    //const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; // Replace with your actual Vapi.ai API key
-    const vapiApiKey = '0bda626b-7fbe-443c-b376-f526a085f25a';
+    const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; 
+    //const vapiApiKey = '0bda626b-7fbe-443c-b376-f526a085f25a';
 
     console.log('Page loaded');
 
@@ -135,8 +135,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayAnalytics(callLogs) {
-        const analyticsSection = document.getElementById('analytics-chart-section');
-        //analyticsSection.innerHTML = ''; // Clear existing content
     
         const metrics = {
             totalCalls: [],
@@ -147,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     
         callLogs.forEach(log => {
-            if (log.analysis && log.analysis.structuredData) {
+            if (log.summary && log.analysis && log.analysis.structuredData) {
                 const date = new Date(log.createdAt).toLocaleDateString();
                 metrics.totalCalls.push({ date, value: parseFloat(log.analysis.structuredData.totalCalls) || 0 });
                 metrics.avgCallDuration.push({ date, value: parseFloat(log.analysis.structuredData.AHT) || 0 });
