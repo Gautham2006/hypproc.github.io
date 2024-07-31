@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function() {
         callLogs.forEach(log => {
             if (log.summary && log.analysis && log.analysis.structuredData) {
                 const date = new Date(log.createdAt).toLocaleDateString();
-                metrics.totalCalls.push({ date, value: parseFloat(log.analysis.structuredData.totalCalls) || 0 });
+                metrics.totalCalls.push({ date, value: parseFloat(log.analysis.structuredData.RT) || 0 });
                 metrics.avgCallDuration.push({ date, value: parseFloat(log.analysis.structuredData.AHT) || 0 });
                 metrics.customerSatisfaction.push({ date, value: parseFloat(log.analysis.structuredData.CSAT) || 0 });
                 metrics.firstCallResolution.push({ date, value: parseFloat(log.analysis.structuredData.FCR) || 0 });
