@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
             displayCallLogs(data);
             // Wait for the DOM to be fully updated before displaying analytics
             DisplayAnalytics(data);
-            setTimeout(() => displayAnalytics(data), 1000);
+            setTimeout(() => displayAnalytics(data), 3000);
         })
         .catch(error => {
             console.error('Error fetching call logs:', error);
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayAnalytics(callLogs) {
-        const analyticsSection = document.getElementById('analytics-section');
+        const analyticsSection = document.getElementById('analytics--chart-section');
         analyticsSection.innerHTML = ''; // Clear existing content
     
         const metrics = {
