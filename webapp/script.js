@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log('Call Logs:', data);
             displayCallLogs(data);
             // Wait for the DOM to be fully updated before displaying analytics
+            DisplayAnalytics(data);
             setTimeout(() => displayAnalytics(data), 1000);
         })
         .catch(error => {
@@ -133,82 +134,82 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-//     function displayAnalytics(callLogs) {
-//         const analyticsSection = document.getElementById('analytics-section');
-//         analyticsSection.innerHTML = ''; // Clear existing content
-
-//         const metrics = {
-//             totalCalls: [],
-//             avgCallDuration: [],
-//             customerSatisfaction: [],
-//             firstCallResolution: [],
-//             netPromoterScore: []
-//         };
-
-//         callLogs.forEach(log => {
-//             if (log.analysis && log.analysis.structuredData) {
-//                 const date = new Date(log.createdAt).toLocaleDateString();
-//                 metrics.totalCalls.push({ date, value: parseFloat(log.analysis.structuredData.totalCalls) || 0 });
-//                 metrics.avgCallDuration.push({ date, value: parseFloat(log.analysis.structuredData.AHT) || 0 });
-//                 metrics.customerSatisfaction.push({ date, value: parseFloat(log.analysis.structuredData.CSAT) || 0 });
-//                 metrics.firstCallResolution.push({ date, value: parseFloat(log.analysis.structuredData.FCR) || 0 });
-//                 metrics.netPromoterScore.push({ date, value: parseFloat(log.analysis.structuredData.NPS) || 0 });
-//             }
-//         });
-// //jdjdj
-//         // createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
-//         // createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
-//         // createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
-//         // createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
-//         // createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
-//     }
-
-//     // function createLineChart(canvasId, label, data) {
-//     //     console.log(`Attempting to create chart for ${canvasId}`);
-//     //     const ctx = document.getElementById(canvasId);
-//     //     if (!ctx) {
-//     //         console.error(`Canvas element with id ${canvasId} not found.`);
-//     //         return;
-//     //     }
-//     //     const chartData = {
-//     //         labels: data.map(d => d.date),
-//     //         datasets: [{
-//     //             label: label,
-//     //             data: data.map(d => d.value),
-//     //             fill: false,
-//     //             borderColor: 'rgba(75, 192, 192, 1)',
-//     //             tension: 0.1
-//     //         }]
-//     //     };
-
-//     //     const chartConfig = {
-//     //         type: 'line',
-//     //         data: chartData,
-//     //         options: {
-//     //             responsive: true,
-//     //             scales: {
-//     //                 x: {
-//     //                     display: true,
-//     //                     title: {
-//     //                         display: true,
-//     //                         text: 'Date'
-//     //                     }
-//     //                 },
-//     //                 y: {
-//     //                     display: true,
-//     //                     title: {
-//     //                         display: true,
-//     //                         text: 'Value'
-//     //                     }
-//     //                 }
-//     //             }
-//     //         }
-//     //     };
-
-//     //     new Chart(ctx.getContext('2d'), chartConfig);
-//     // }
-
     function displayAnalytics(callLogs) {
+        const analyticsSection = document.getElementById('analytics-section');
+        analyticsSection.innerHTML = ''; // Clear existing content
+
+        const metrics = {
+            totalCalls: [],
+            avgCallDuration: [],
+            customerSatisfaction: [],
+            firstCallResolution: [],
+            netPromoterScore: []
+        };
+
+        callLogs.forEach(log => {
+            if (log.analysis && log.analysis.structuredData) {
+                const date = new Date(log.createdAt).toLocaleDateString();
+                metrics.totalCalls.push({ date, value: parseFloat(log.analysis.structuredData.totalCalls) || 0 });
+                metrics.avgCallDuration.push({ date, value: parseFloat(log.analysis.structuredData.AHT) || 0 });
+                metrics.customerSatisfaction.push({ date, value: parseFloat(log.analysis.structuredData.CSAT) || 0 });
+                metrics.firstCallResolution.push({ date, value: parseFloat(log.analysis.structuredData.FCR) || 0 });
+                metrics.netPromoterScore.push({ date, value: parseFloat(log.analysis.structuredData.NPS) || 0 });
+            }
+        });
+
+        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+        createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
+        createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
+        createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
+        createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
+    }
+
+    function createLineChart(canvasId, label, data) {
+        console.log(`Attempting to create chart for ${canvasId}`);
+        const ctx = document.getElementById(canvasId);
+        if (!ctx) {
+            console.error(`Canvas element with id ${canvasId} not found.`);
+            return;
+        }
+        const chartData = {
+            labels: data.map(d => d.date),
+            datasets: [{
+                label: label,
+                data: data.map(d => d.value),
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.1
+            }]
+        };
+
+        const chartConfig = {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx.getContext('2d'), chartConfig);
+    }
+
+    function DisplayAnalytics(callLogs) {
         const analyticsSection = document.getElementById('analytics-section');
         analyticsSection.innerHTML = ''; // Clear existing content
 
