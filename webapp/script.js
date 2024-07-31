@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const clientId = '164118449897-pcja0agskhvncjl5mrmt6hp2qmcmret8.apps.googleusercontent.com'; 
     const redirectUri = 'https://hypnos.site/webapp'; 
     const scope = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
-    const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; 
-    //const vapiApiKey = '0bda626b-7fbe-443c-b376-f526a085f25a';
+    //const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; 
+    const vapiApiKey = '0bda626b-7fbe-443c-b376-f526a085f25a';
 
     console.log('Page loaded');
 
