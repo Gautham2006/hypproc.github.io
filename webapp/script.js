@@ -5,11 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const vapiApiKey = '1c33ba3f-8c46-4a26-aa2f-049a86f96b0c'; 
     //const vapiApiKey = '0bda626b-7fbe-443c-b376-f526a085f25a';
     
-    
     let currentPage = 1;
     const logsPerPage = 10;
     let callLogs = [];
-    
+
     console.log('Page loaded');
 
     // Google OAuth Sign-In
@@ -102,7 +101,8 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             console.log('Call Logs:', data);
-            displayCallLogs(data);
+            callLogs = data; // Correctly assign data to callLogs
+            displayCallLogs();
             // Wait for the DOM to be fully updated before displaying analytics
             DisplayAnalytics(data);
             setTimeout(() => displayAnalytics(data), 3000);
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const start = (currentPage - 1) * logsPerPage;
         const end = start + logsPerPage;
-        const paginatedLogs = callLogs.slice(start, end);
+        const paginatedLogs = callLogs.slice(start, end); // Use callLogs for pagination
 
         paginatedLogs.forEach(log => {
             if (log.summary) {
@@ -169,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function displayAnalytics(callLogs) {
-    
         const metrics = {
             totalCalls: [],
             avgCallDuration: [],
@@ -177,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
             firstCallResolution: [],
             netPromoterScore: []
         };
-    
+
         callLogs.forEach(log => {
             if (log.summary && log.analysis && log.analysis.structuredData) {
                 const date = new Date(log.createdAt).toLocaleDateString();
@@ -188,17 +187,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 metrics.netPromoterScore.push({ date, value: parseFloat(log.analysis.structuredData.NPS) || 0 });
             }
         });
-    
+
         console.log(metrics); // Debug: Check if metrics are correctly populated
-    
-        // Create chartss
+
+        // Create charts
         createLineChart('totalCallsChart', 'Resolution Time', metrics.totalCalls);
         createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
         createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
         createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
         createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
     }
-    
+
     function createLineChart(canvasId, label, data) {
         console.log(`Attempting to create chart for ${canvasId}`); // Debug: Check which chart is being created
         const ctx = document.getElementById(canvasId);
@@ -206,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error(`Canvas element with id ${canvasId} not found.`);
             return;
         }
-    
+
         const chartData = {
             labels: data.map(d => d.date),
             datasets: [{
@@ -217,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 tension: 0.1
             }]
         };
-    
+
         const chartConfig = {
             type: 'line',
             data: chartData,
@@ -241,10 +240,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         };
-    
+
         new Chart(ctx.getContext('2d'), chartConfig);
     }
-    
 
     function DisplayAnalytics(callLogs) {
         const analyticsSection = document.getElementById('analytics-section');
@@ -276,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 'Authorization': `Bearer ${vapiApiKey}`
             }
         };
-        
+
         fetch(`https://api.vapi.ai/call/${id}`, options)
         .then(response => {
             if (!response.ok) {
@@ -288,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error deleting call log:', error);
         });
     };
-    
+
     // Tab switching functionality
     window.openTab = function(event, tabName) {
         // Get all elements with class="tab-content" and hide them
@@ -308,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.currentTarget.className += " active";
 
         if (tabName === 'Analytics') {
-            fetchCallLogs();
+            displayAnalytics(callLogs);
         }
     }
 
