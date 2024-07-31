@@ -107,22 +107,24 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function displayCallLogs(callLogs) {
+    function displayCallLogs() {
         const callLogList = document.getElementById('call-log-list');
         callLogList.innerHTML = ''; // Clear existing logs
 
-        callLogs.forEach(log => {
+        const start = (currentPage - 1) * logsPerPage;
+        const end = start + logsPerPage;
+        const paginatedLogs = callLogs.slice(start, end);
+
+        paginatedLogs.forEach(log => {
             if (log.summary) {
                 const logEntry = document.createElement('div');
                 logEntry.className = 'call-log-entry';
-                //<span class="call-summary">Summary: ${log.summary || 'N/A'}</span>
                 logEntry.innerHTML = `
                     <div class="call-details">
                         <span class="call-date">Date: ${new Date(log.createdAt).toLocaleDateString()}</span>
                         <span class="call-time">Time: ${new Date(log.createdAt).toLocaleTimeString()}</span>
                         <span class="call-duration">Duration: ${Math.round((new Date(log.endedAt) - new Date(log.startedAt)) / 1000 / 60)} mins</span>
                         <span class="call-status ${log.status}">Status: ${log.status.charAt(0).toUpperCase() + log.status.slice(1)}</span>
-                        
                     </div>
                     <div class="actions">
                         <button class="btn delete" onclick="deleteLog('${log.id}', this)">Delete</button>
@@ -132,11 +134,34 @@ document.addEventListener("DOMContentLoaded", function() {
                         </audio>
                     </div>
                 `;
-
                 callLogList.appendChild(logEntry);
             }
         });
+
+        updatePaginationButtons();
     }
+
+    function updatePaginationButtons() {
+        const prevButton = document.querySelector('.pagination .prev');
+        const nextButton = document.querySelector('.pagination .next');
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage * logsPerPage >= callLogs.length;
+    }
+
+    document.querySelector('.pagination .prev').addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            displayCallLogs();
+        }
+    });
+
+    document.querySelector('.pagination .next').addEventListener('click', () => {
+        if (currentPage * logsPerPage < callLogs.length) {
+            currentPage++;
+            displayCallLogs();
+        }
+    });
 
     function displayAnalytics(callLogs) {
     
