@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function displayAnalytics(callLogs) {
         const analyticsSection = document.getElementById('analytics-section');
         analyticsSection.innerHTML = ''; // Clear existing content
-
+    
         const metrics = {
             totalCalls: [],
             avgCallDuration: [],
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
             firstCallResolution: [],
             netPromoterScore: []
         };
-
+    
         callLogs.forEach(log => {
             if (log.analysis && log.analysis.structuredData) {
                 const date = new Date(log.createdAt).toLocaleDateString();
@@ -156,21 +156,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 metrics.netPromoterScore.push({ date, value: parseFloat(log.analysis.structuredData.NPS) || 0 });
             }
         });
-
+    
+        console.log(metrics); // Debug: Check if metrics are correctly populated
+    
+        // Create charts
         createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
         createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
         createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
         createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
         createLineChart('netPromoterScoreChart', 'Net Promoter Score', metrics.netPromoterScore);
     }
-
+    
     function createLineChart(canvasId, label, data) {
-        console.log(`Attempting to create chart for ${canvasId}`);
+        console.log(`Attempting to create chart for ${canvasId}`); // Debug: Check which chart is being created
         const ctx = document.getElementById(canvasId);
         if (!ctx) {
             console.error(`Canvas element with id ${canvasId} not found.`);
             return;
         }
+    
         const chartData = {
             labels: data.map(d => d.date),
             datasets: [{
@@ -181,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 tension: 0.1
             }]
         };
-
+    
         const chartConfig = {
             type: 'line',
             data: chartData,
@@ -205,9 +209,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         };
-
+    
         new Chart(ctx.getContext('2d'), chartConfig);
     }
+    
 
     function DisplayAnalytics(callLogs) {
         const analyticsSection = document.getElementById('analytics-section');
