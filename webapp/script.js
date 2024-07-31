@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayAnalytics(callLogs) {
-        const analyticsSection = document.getElementById('analytics--chart-section');
-        analyticsSection.innerHTML = ''; // Clear existing content
+        const analyticsSection = document.getElementById('analytics-chart-section');
+        //analyticsSection.innerHTML = ''; // Clear existing content
     
         const metrics = {
             totalCalls: [],
