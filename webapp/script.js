@@ -126,6 +126,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                     <div class="actions">
                         <button class="btn delete" onclick="deleteLog('${log.id}', this)">Delete</button>
+                        <audio controls>
+                            <source src="${log.recordingUrl}" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
                     </div>
                 `;
 
@@ -157,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         console.log(metrics); // Debug: Check if metrics are correctly populated
     
-        // Create charts
+        // Create chartss
         createLineChart('totalCallsChart', 'Resolution Time', metrics.totalCalls);
         createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
         createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
