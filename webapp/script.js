@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(metrics); // Debug: Check if metrics are correctly populated
     
         // Create charts
-        createLineChart('totalCallsChart', 'Total Calls', metrics.totalCalls);
+        createLineChart('totalCallsChart', 'Resolution Time', metrics.totalCalls);
         createLineChart('avgCallDurationChart', 'Average Call Duration', metrics.avgCallDuration);
         createLineChart('customerSatisfactionChart', 'Customer Satisfaction', metrics.customerSatisfaction);
         createLineChart('firstCallResolutionChart', 'First Call Resolution', metrics.firstCallResolution);
